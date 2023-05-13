@@ -145,7 +145,7 @@ if(isset($_POST['submit']))
                         
                      
                        
-                    </ul>
+                    </ul>Admin
           
                     <ul class="navbar-nav my-lg-0">
 
@@ -190,11 +190,11 @@ if(isset($_POST['submit']))
                         <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
                         <li class="nav-label">Log</li>
                         <li> <a href="all_users.php">  <span><i class="fa fa-user f-s-20 "></i></span><span>Users</span></a></li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Restaurant</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Canteen</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="all_restaurant.php">All Restaurants</a></li>
+								<li><a href="all_restaurant.php">All Canteens</a></li>
 								<li><a href="add_category.php">Add Category</a></li>
-                                <li><a href="add_restaurant.php">Add Restaurant</a></li>
+                                <li><a href="add_restaurant.php">Add Canteen</a></li>
                                 
                             </ul>
                         </li>
@@ -286,7 +286,7 @@ if(isset($_POST['submit']))
 											
 											 <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="control-label">Select Restaurant</label>
+                                                    <label class="control-label">Select Canteen</label>
 													<select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
                                                         <option>--Select Restaurant--</option>
                                                  <?php $ssql ="select * from restaurant";
