@@ -164,7 +164,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 																																					
 											</tr>	
 											<tr>
-												<td><strong>Title:</strong></td>
+												<td><strong>Item Name:</strong></td>
 												    <td><center><?php echo $rows['title']; ?></center></td>
 													    <td><center>
 													   <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?newform_id=<?php echo htmlentities($rows['o_id']);?>');" title="Update order">
@@ -181,14 +181,8 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											</tr>
 											<tr>
 													<td><strong>Price:</strong></td>
-												    <td><center>$<?php echo $rows['price']; ?></center></td>
+												    <td><center>Rs <?php echo $rows['price']; ?></center></td>
 													   
-												   																							
-											</tr>
-											<tr>
-													<td><strong>Address:</strong></td>
-												    <td><center><?php echo $rows['address']; ?></center></td>
-													  
 												   																							
 											</tr>
 											<tr>

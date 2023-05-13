@@ -43,10 +43,11 @@ else
 
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
-                    </ul>
+                    </ul>Admin
                     <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
-                            <p class= "admin_text" style="color:green; font-size: 21px">Admin</p>
+                            <a class="nav-link dropdown-toggle text-muted " style="padding: 0.5rem 0.5rem" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
+                            <!-- <p class= "admin_text" style="color:green; font-size: 21px">Admin</p> -->
+                            
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>

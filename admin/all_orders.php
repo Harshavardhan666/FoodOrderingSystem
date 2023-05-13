@@ -136,7 +136,7 @@ session_start();
                                     <thead class="thead-dark">
                                             <tr>
                                                 <th>User</th>		
-                                                <th>Title</th>
+                                                <th>Item Name</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
 												<th>Status</th>												
@@ -167,7 +167,7 @@ session_start();
 																					           <td>'.$rows['username'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['quantity'].'</td>
-																								<td>$'.$rows['price'].'</td>';
+																								<td>Rs '.$rows['price'].'</td>';
 																								?>
 																								<?php 
 																			$status=$rows['status'];

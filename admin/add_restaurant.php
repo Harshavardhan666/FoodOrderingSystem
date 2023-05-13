@@ -64,7 +64,7 @@ if(isset($_POST['submit']))
 			  
 													$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																 New Restaurant Added Successfully.
+																 New Canteen Added Successfully.
 															</div>';
                 
 	
@@ -113,7 +113,7 @@ if(isset($_POST['submit']))
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>Add Restaurant</title>
+    <title>Add Canteen</title>
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -232,7 +232,7 @@ if(isset($_POST['submit']))
                                     <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Restaurant</h4>
+                                <h4 class="m-b-0 text-white">Add Canteen</h4>
                             </div>
                             <div class="card-body">
                                 <form action='' method='post'  enctype="multipart/form-data">
@@ -242,7 +242,7 @@ if(isset($_POST['submit']))
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Restaurant Name</label>
+                                                    <label class="control-label">Canteen Name</label>
                                                     <input type="text" name="res_name" class="form-control">
                                                    </div>
                                             </div>
@@ -359,7 +359,7 @@ if(isset($_POST['submit']))
 											
                                         </div>
                         
-                                        <h3 class="box-title m-t-40">Restaurant Address</h3>
+                                        <h3 class="box-title m-t-40">Canteen Landmark</h3>
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-12 ">

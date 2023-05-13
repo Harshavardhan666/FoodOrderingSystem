@@ -144,7 +144,7 @@ session_start();
                                                 <th>Open Hrs</th>
                                                 <th>Close Hrs</th>
 												<th>Open Days</th>
-												  <th>Address</th>
+												  <th>Landmark</th>
 												  <th>Image</th>
 												   <th>Action</th>  
                                             </tr>
