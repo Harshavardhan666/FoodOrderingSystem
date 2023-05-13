@@ -5,9 +5,11 @@
 session_start(); 
 error_reporting(0); 
 include("connection/connect.php"); 
+
 if(isset($_POST['submit'] )) 
 {
-     if(empty($_POST['firstname']) || 
+
+     if(empty($_POST['username']) || empty($_POST['firstname']) || 
    	    empty($_POST['lastname'])|| 
 		empty($_POST['email']) ||  
 		empty($_POST['phone'])||
@@ -23,9 +25,12 @@ if(isset($_POST['submit'] ))
 	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
 		
+   if(!(preg_match('/^[C]{1}[B]{1}[.]{1}[E]{1}[N]{1}[.]{1}[U]{1}[4]{1}[CSE20]{5}[012346]{1}[0-6]{1}[0-9]{1}$/', $_POST['username']))){
 
+         echo "<script>alert('Invalid Username');</script>";
+   }
 	
-	if($_POST['password'] != $_POST['cpassword']){  
+	elseif($_POST['password'] != $_POST['cpassword']){
        	
           echo "<script>alert('Password not match');</script>"; 
     }
