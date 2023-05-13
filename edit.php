@@ -25,12 +25,12 @@ if(isset($_POST['submit'] ))
 	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
 		
-   if(!(preg_match('/^[C]{1}[B]{1}[.]{1}[E]{1}[N]{1}[.]{1}[U]{1}[4]{1}[CSE20]{5}[012346]{1}[0-6]{1}[0-9]{1}$/', $_POST['username']))){
+   // if(!(preg_match('/^[C]{1}[B]{1}[.]{1}[E]{1}[N]{1}[.]{1}[U]{1}[4]{1}[CSE20]{5}[012346]{1}[0-6]{1}[0-9]{1}$/', $_POST['username']))){
 
-         echo "<script>alert('Invalid Username');</script>";
-   }
+   //       echo "<script>alert('Invalid Username');</script>";
+   // }
 	
-	elseif($_POST['password'] != $_POST['cpassword']){
+	if($_POST['password'] != $_POST['newpassword']){
        	
           echo "<script>alert('Password not match');</script>"; 
     }
@@ -99,8 +99,8 @@ if(isset($_POST['submit'] ))
 							<?php
 						if(empty($_SESSION["user_id"]))
 							{
-								echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>
-							  <li class="nav-item"><a href="registration.php" class="nav-link active">Register</a> </li>';
+								echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Profile</a> </li>
+                              <li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
 							}
 						else
 							{
@@ -139,14 +139,7 @@ if(isset($_POST['submit'] ))
                                        <label for="exampleInputEmail1">User-Name</label>
                                        <input class="form-control" type="text" name="username" id="example-text-input"> 
                                     </div>
-                                    <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">First Name</label>
-                                       <input class="form-control" type="text" name="firstname" id="example-text-input"> 
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Last Name</label>
-                                       <input class="form-control" type="text" name="lastname" id="example-text-input-2"> 
-                                    </div>
+                           
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">Email Address</label>
                                        <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp"> 
@@ -160,8 +153,8 @@ if(isset($_POST['submit'] ))
                                        <input type="password" class="form-control" name="password" id="exampleInputPassword1"> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputPassword1">Confirm password</label>
-                                       <input type="password" class="form-control" name="cpassword" id="exampleInputPassword2"> 
+                                       <label for="exampleInputPassword1">New password</label>
+                                       <input type="password" class="form-control" name="newpassword" id="exampleInputPassword2"> 
                                     </div>
 									 <!-- <div class="form-group col-sm-12">
                                        <label for="exampleTextarea">Delivery Address</label>

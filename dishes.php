@@ -39,8 +39,8 @@ include_once 'product-action.php';
 							<?php
 						if(empty($_SESSION["user_id"]))
 							{
-								echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>
-							  <li class="nav-item"><a href="registration.php" class="nav-link active">Register</a> </li>';
+								echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Profile</a> </li>
+                                <li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
 							}
 						else
 							{
