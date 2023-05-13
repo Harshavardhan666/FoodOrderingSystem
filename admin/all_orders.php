@@ -139,7 +139,6 @@ session_start();
                                                 <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
-												<th>Address</th>
 												<th>Status</th>												
 												 <th>Reg-Date</th>
 												  <th>Action</th>
@@ -168,8 +167,7 @@ session_start();
 																					           <td>'.$rows['username'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['quantity'].'</td>
-																								<td>$'.$rows['price'].'</td>
-																								<td>'.$rows['address'].'</td>';
+																								<td>$'.$rows['price'].'</td>';
 																								?>
 																								<?php 
 																			$status=$rows['status'];
