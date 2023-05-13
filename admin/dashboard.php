@@ -44,10 +44,6 @@ else
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                     </ul>
-                    
-                       
-                      
-                      
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
                             <p class= "admin_text" style="color:green; font-size: 21px">Admin</p>

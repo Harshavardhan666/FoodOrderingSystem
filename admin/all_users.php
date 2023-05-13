@@ -136,7 +136,6 @@ session_start();
                                                 <th>Phone</th>
 												<!-- <th>Address</th>												 -->
 												 <th>Reg-Date</th>
-												  <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -163,10 +162,7 @@ session_start();
 																								<td>'.$rows['email'].'</td>
 																								<td>'.$rows['phone'].'</td>
 																																														
-																								<td>'.$rows['date'].'</td>
-																									 <td><a href="delete_users.php?user_del='.$rows['u_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																									 <a href="update_users.php?user_upd='.$rows['u_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
-																									</td></tr>';
+																								<td>'.$rows['date'].'</td></tr>';
 																		}	
 														}
 											?>
