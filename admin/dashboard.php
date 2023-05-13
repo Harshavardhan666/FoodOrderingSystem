@@ -37,7 +37,6 @@ else
 
             <div class="navbar-header">
                     <a class="navbar-brand" href="dashboard.php">
-                        
                         <span><img src="images/icn.png" alt="homepage" class="dark-logo" /></span>
                     </a>
                 </div>
@@ -51,6 +50,7 @@ else
                       
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
+                            <p class= "admin_text" style="color:green; font-size: 21px">Admin</p>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>

@@ -8,68 +8,8 @@
 @import url(../icons/material-design-iconic-font/css/materialdesignicons.min.css);
 @import url(spinners.css);
 @import url(animate.css);
-/*
-    Template: Ela Admin
-    Author: Zebra Theme
-    Developer by: Zebra Theme
 
-    Table of Content
-    ================
 
-1. variable
-2. fonts
-3. card
-4. global
-5. badge
-6. tab
-7. modal
-8. timeline
-9. data-table
-10. panel
-11. button
-12. header
-13. gmap
-14. chat
-15. carousel
-16. weather
-17. invoice-edit
-18. invoice
-19. widget-stat
-20. recent-comments
-21. recent-message
-22. forms
-23. compose-email
-24. progress-bar
-25. todo-list
-26. datamap
-27. table
-28. order-progress
-29. login
-30. chart
-31. nestable
-32. profile
-33. profile-widget
-34. ui-element-basic
-35. calendar
-36. flot-chart
-37. morris-chart
-38. products_1
-39. products_2
-40. products_3
-41. favourite_menu
-42. order-list
-43. booking-system
-44. scrollable
-45. vector-map
-46. menu-upload
-47. social-media-stats
-48. vertical-carousel
-49. chartist
-50. table-export
-51. ui-widget-v1
-42. responsive
-
-*/
 .preloader {
   width: 100%;
   height: 100%;
@@ -1107,13 +1047,13 @@ h6.h1 {
   line-height: 60px;
   display: inline-block;
 }
-.header .top-navbar .navbar-nav > .nav-item > .nav-link {
+.header .top-navbar .navbar-nav > .nav-item > .nav-link .admin_text{
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   font-size: 15px;
   line-height: 40px;
 }
-.header .top-navbar .navbar-nav > .nav-item.show {
+.header .top-navbar .navbar-nav > .nav-item.show .admin_text.show {
   background: rgba(0, 0, 0, 0.05);
 }
 .header .top-navbar .mailbox {
@@ -1129,67 +1069,67 @@ h6.h1 {
   width: 30px;
   border-radius: 100%;
 }
-.header .dropdown-menu {
+.header .dropdown-menu .admin_text{
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   border-color: rgba(120, 130, 140, 0.13);
 }
-.header .dropdown-menu .dropdown-item {
+.header .dropdown-menu .dropdown-item .admin_text{
   padding: 7px 1.5rem;
 }
-.header ul.dropdown-user {
+.header ul.dropdown-user .admin_text{
   padding: 0;
   min-width: 175px;
 }
-.header ul.dropdown-user li {
+.header ul.dropdown-user li .admin_text{
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.header ul.dropdown-user li .dw-user-box {
+.header ul.dropdown-user li .dw-user-box .admin_text{
   padding: 10px 15px;
 }
-.header ul.dropdown-user li .dw-user-box .u-img {
+.header ul.dropdown-user li .dw-user-box .u-img .admin_text{
   width: 70px;
   display: inline-block;
   vertical-align: top;
 }
-.header ul.dropdown-user li .dw-user-box .u-img img {
+.header ul.dropdown-user li .dw-user-box .u-img img .admin_text{
   width: 100%;
   border-radius: 5px;
 }
-.header ul.dropdown-user li .dw-user-box .u-text {
+.header ul.dropdown-user li .dw-user-box .u-text .admin_text{
   display: inline-block;
   padding-left: 10px;
 }
-.header ul.dropdown-user li .dw-user-box .u-text h4 {
+.header ul.dropdown-user li .dw-user-box .u-text h4 .admin_text{
   margin: 0;
   font-size: 15px;
 }
-.header ul.dropdown-user li .dw-user-box .u-text p {
+.header ul.dropdown-user li .dw-user-box .u-text p .admin_text{
   margin-bottom: 2px;
   font-size: 12px;
 }
-.header ul.dropdown-user li .dw-user-box .u-text .btn {
+.header ul.dropdown-user li .dw-user-box .u-text .btn .admin_text{
   color: #ffffff;
   padding: 5px 10px;
   display: inline-block;
 }
-.header ul.dropdown-user li .dw-user-box .u-text .btn:hover {
+.header ul.dropdown-user li .dw-user-box .u-text .btn:hover .admin_text{
   background: #e6294b;
 }
-.header ul.dropdown-user li a {
+.header ul.dropdown-user li a .admin_text{
   padding: 9px 15px;
   display: block;
   color: #67757c;
 }
-.header ul.dropdown-user li a:hover {
+.header ul.dropdown-user li a:hover .admin_text:hover{
   background: #f2f4f8;
   color: #1976d2;
   text-decoration: none;
 }
-.header ul.dropdown-user li.divider {
+.header ul.dropdown-user li.divider .admin_text{
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
@@ -1292,7 +1232,7 @@ h6.h1 {
   position: static;
   width: 100%;
 }
-.mega-dropdown .dropdown-menu {
+.mega-dropdown .dropdown-menu .admin_text{
   width: 100%;
   padding: 30px;
   margin-top: 0;
@@ -1350,7 +1290,7 @@ textarea {
   padding: 11px 20px 15px;
   border-bottom: 1px solid rgba(120, 130, 140, 0.13);
 }
-.mailbox ul li .nav-link {
+.mailbox ul li .nav-link .admin_text{
   border-top: 1px solid rgba(120, 130, 140, 0.13);
   padding-top: 15px;
 }
@@ -1498,21 +1438,21 @@ textarea {
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  .header .top-navbar .navbar-nav > .nav-item.show {
+  .header .top-navbar .navbar-nav > .nav-item.show .admin_text.show{
     position: static;
   }
-  .header .top-navbar .navbar-nav > .nav-item.show .dropdown-menu {
+  .header .top-navbar .navbar-nav > .nav-item.show .dropdown-menu .admin_text{
     width: 100%;
     margin-top: 0;
   }
-  .header .top-navbar .navbar-nav > .nav-item > .nav-link {
+  .header .top-navbar .navbar-nav > .nav-item > .nav-link .admin_text{
     padding-left: 0.50rem;
     padding-right: 0.50rem;
   }
-  .header .top-navbar .navbar-nav .dropdown-menu {
+  .header .top-navbar .navbar-nav .dropdown-menu .admin_text{
     position: absolute;
   }
-  .mega-dropdown .dropdown-menu {
+  .mega-dropdown .dropdown-menu .admin_text{
     height: 480px;
     overflow: auto;
   }
@@ -2291,7 +2231,7 @@ textarea {
   vertical-align: top;
   width: 150px;
 }
-.vtabs .tabs-vertical li .nav-link {
+.vtabs .tabs-vertical li .nav-link .admin_text{
   border: 0 none;
   border-radius: 4px 0 0 4px;
   color: #263238;
@@ -2304,14 +2244,22 @@ textarea {
 }
 .tabs-vertical li .nav-link.active,
 .tabs-vertical li .nav-link.active:focus,
-.tabs-vertical li .nav-link:hover {
+.tabs-vertical li .nav-link:hover,
+.admin_text.active, .admin_text.active:focus{
   background: #1976d2 none repeat scroll 0 0;
   border: 0 none;
   color: #ffffff;
 }
+
+.admin_text{
+  cursor: pointer;
+}
+
+
 .customvtab .tabs-vertical li .nav-link.active,
 .customvtab .tabs-vertical li .nav-link:focus,
-.customvtab .tabs-vertical li .nav-link:hover {
+.customvtab .tabs-vertical li .nav-link:hover,
+.admin_text.active, .admin_text.active:focus{
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
@@ -2334,16 +2282,16 @@ textarea {
   border-style: none solid solid;
   border-width: 0 1px 1px;
 }
-.customtab2 li a.nav-link {
+.customtab2 li a.nav-link .admin_text{
   border: 0 none;
   color: #67757c;
   margin-right: 3px;
 }
-.customtab2 li a.nav-link.active {
+.customtab2 li a.nav-link.active .admin_text.active{
   background: #1976d2 none repeat scroll 0 0;
   color: #ffffff;
 }
-.customtab2 li a.nav-link:hover {
+.customtab2 li a.nav-link:hover{
   background: #1976d2 none repeat scroll 0 0;
   color: #ffffff;
 }
@@ -5039,7 +4987,7 @@ label {
   margin-left: 0;
   margin-right: 0;
 }
-.dropdown-menu li {
+.dropdown-menu li .admin_text{
   font-size: 14px;
   padding: 5px 15px;
 }
@@ -5637,13 +5585,14 @@ tbody tr td:last-child {
   margin-bottom: 10px !important;
 }
 .customtab li a.nav-link,
-.profile-tab li a.nav-link {
+.profile-tab li a.nav-link{
   border: 0 none;
   color: #455a64;
   padding: 15px 20px;
 }
 .customtab li a.nav-link.active,
-.profile-tab li a.nav-link.active {
+.profile-tab li a.nav-link.active,
+.admin_text.active {
   border-bottom: 2px solid #1976d2;
   color: #1976d2;
 }
