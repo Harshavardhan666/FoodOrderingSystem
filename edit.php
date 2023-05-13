@@ -165,7 +165,7 @@ if(isset($_POST['submit'] ))
                                 
                                  <div class="row">
                                     <div class="col-sm-4">
-                                       <p> <input type="submit" value="Register" name="submit" class="btn theme-btn"> </p>
+                                       <p> <input type="submit" value="Edit" name="submit" class="btn theme-btn"> </p>
                                     </div>
                                  </div>
                               </form>

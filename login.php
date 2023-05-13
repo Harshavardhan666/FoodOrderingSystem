@@ -78,7 +78,7 @@ if(isset($_POST['submit']))
 	                        if(is_array($row)) 
 								{
                                     	$_SESSION["user_id"] = $row['u_id']; 
-										 header("refresh:1;url=index.php"); 
+										header("refresh:1;url=index.php"); 
 	                            } 
 							else
 							    {
