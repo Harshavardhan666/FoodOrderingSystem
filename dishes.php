@@ -143,9 +143,7 @@ foreach ($_SESSION["cart_item"] as $item)
 	<?php
 $item_total += ($item["price"]*$item["quantity"]); 
 }
-?>								  
-									  
-									  
+?>								  					  
 									  
                                     </div>
                                 </div>
@@ -155,7 +153,7 @@ $item_total += ($item["price"]*$item["quantity"]);
                                 <div class="widget-body">
                                     <div class="price-wrap text-xs-center">
                                         <p>TOTAL</p>
-                                        <h3 class="value"><strong><?php echo "$".$item_total; ?></strong></h3>
+                                        <h3 class="value"><strong><?php echo "Rs ".$item_total; ?></strong></h3>
                                         <p>Free Delivery!</p>
                                         <?php
                                         if($item_total==0){
@@ -224,7 +222,7 @@ $item_total += ($item["price"]*$item["quantity"]);
                                         </div>
                                
                                         <div class="col-xs-12 col-sm-12 col-lg-3 pull-right item-cart-info"> 
-										<span class="price pull-left" >$<?php echo $product['price']; ?></span>
+										<span class="price pull-left" >Rs <?php echo $product['price']; ?></span>
 										  <input class="b-r-0" type="number" name="quantity"  style="margin-left:20px;width:40%; padding: 2px 0 2px 4px ;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;" value="0" size="1" min="0" />
 										  
                                           <input type="submit" class="btn theme-btn" style="margin-left:40px;margin-top:10px;" value="Add To Cart" />
