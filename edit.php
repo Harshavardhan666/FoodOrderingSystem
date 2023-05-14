@@ -83,7 +83,147 @@ if(isset($_POST['submit'] ))
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"> </head>
+    <link href="css/helper.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+
+    <style>
+
+.btn-inverse {
+  background: #2f3d4a;
+  border: 1px solid #2f3d4a;
+  color: #ffffff;
+}
+.btn-inverse:hover {
+  background: #2f3d4a;
+  opacity: 0.7;
+  color: #ffffff;
+  border: 1px solid #2f3d4a;
+  background-color: #232a37;
+  border: 1px solid #232a37;
+}
+.btn-inverse:active {
+  background: #232a37;
+  color: #ffffff;
+  background-color: #232a37;
+  border: 1px solid #232a37;
+}
+.btn-inverse:focus {
+  background: #232a37;
+  color: #ffffff;
+  background-color: #232a37;
+  border: 1px solid #232a37;
+}
+.btn-inverse.disabled {
+  background: #2f3d4a;
+  border: 1px solid #2f3d4a;
+  color: #ffffff;
+}
+.btn-inverse.disabled:hover {
+  background: #2f3d4a;
+  opacity: 0.7;
+  color: #ffffff;
+  border: 1px solid #2f3d4a;
+}
+.btn-inverse.disabled:active {
+  background: #232a37;
+  color: #ffffff;
+}
+.btn-inverse.disabled:focus {
+  background: #232a37;
+  color: #ffffff;
+}
+.btn-inverse.active {
+  background: #232a37;
+  color: #ffffff;
+  background-color: #232a37;
+  border: 1px solid #232a37;
+}
+.btn-inverse.disabled.active {
+  background: #232a37;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background: #5c4ac7;
+  border: 1px solid #5c4ac7;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+.btn-primary:hover {
+  background: #5c4ac7;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  border: 1px solid #5c4ac7;
+}
+.btn-primary:active {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+}
+.btn-primary:active:focus {
+  background-color: #6352ce;
+  border: 1px solid #6352ce;
+}
+.btn-primary:active:hover {
+  background-color: #6352ce;
+  border: 1px solid #6352ce;
+}
+.btn-primary:focus {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  background-color: #6352ce;
+  border: 1px solid #6352ce;
+}
+.btn-primary.disabled {
+  background: #5c4ac7;
+  border: 1px solid #5c4ac7;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+.btn-primary.disabled:hover {
+  background: #5c4ac7;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  border: 1px solid #5c4ac7;
+}
+.btn-primary.disabled:active {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+}
+.btn-primary.disabled:focus {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+}
+.btn-primary.active {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+}
+.btn-primary.active:focus {
+  background-color: #6352ce;
+  border: 1px solid #6352ce;
+}
+.btn-primary.active:hover {
+  background-color: #6352ce;
+  border: 1px solid #6352ce;
+}
+.btn-primary.disabled.active {
+  background: #6352ce;
+  -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+  box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
+}
+
+    </style>
+   </head>
 <body>
 <div style=" background-image: url('images/img/pimg.jpg');">
          <header id="header" class="header-scroll top-header headrom">
@@ -165,7 +305,8 @@ if(isset($_POST['submit'] ))
                                 
                                  <div class="row">
                                     <div class="col-sm-4">
-                                       <p> <input type="submit" value="Edit" name="submit" class="btn theme-btn"> </p>
+                                       <input type="submit" value="Save" name="submit" class="btn btn-primary">
+                                       <a href="edit.php" class="btn btn-inverse">Cancel</a>
                                     </div>
                                  </div>
                               </form>
