@@ -260,7 +260,7 @@ $item_total += ($item["price"]*$item["quantity"]);
                     <div class="row bottom-footer">
                         <div class="container">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-3 payment-options color-gray">
+                                <!-- <div class="col-xs-12 col-sm-3 payment-options color-gray">
                                     <h5>Payment Options</h5>
                                     <ul>
                                         <li>
@@ -279,16 +279,18 @@ $item_total += ($item["price"]*$item["quantity"]);
                                             <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 address color-gray">
-                                <h5>Address</h5>
-                                    <p>Amrita Vishwa Vidyapeetham, Ettimadai, Coimbatore, Tamil Nadu, PIN: 641112 </p>
-                                    </div>
-                                <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                                    <h5>Addition informations</h5>
-                                   <!-- <p>Join thousands of other restaurants who benefit from having partnered with us.</p> -->
-                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aliquam quam consequuntur quasi deserunt debitis, similique maiores repudiandae laborum id nulla, veritatis magni incidunt mollitia voluptatum? Perspiciatis pariatur molestiae sunt.</p>
-                                </div>
+                                </div> -->
+                                <a href="https://www.amrita.edu/" target="_blank"><img src="images/amrita.jpg" class="col-xs-12 col-sm-3 payment-options color-gray"></a>
+
+<div class="col-xs-12 col-sm-4 address color-gray">
+<h5>Address</h5>
+            <p>Amrita Vishwa Vidyapeetham, Ettimadai, Coimbatore, Tamil Nadu, PIN: 641112 </p>
+            </div>
+        <div class="col-xs-12 col-sm-5 additional-info color-gray">
+            <h5>Addition informations</h5>
+           <!-- <p>Join thousands of other restaurants who benefit from having partnered with us.</p> -->
+           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aliquam quam consequuntur quasi deserunt debitis, similique maiores repudiandae laborum id nulla, veritatis magni incidunt mollitia voluptatum? Perspiciatis pariatur molestiae sunt.</p>
+        </div>
                             </div>
                         </div>
                     </div>

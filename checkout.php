@@ -215,7 +215,7 @@ else{
                     <div class="row bottom-footer">
                         <div class="container">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-3 payment-options color-gray">
+                                <!-- <div class="col-xs-12 col-sm-3 payment-options color-gray">
                                     <h5>Payment Options</h5>
                                     <ul>
                                         <li>
@@ -234,9 +234,11 @@ else{
                                             <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 address color-gray">
-                                    <h5>Address</h5>
+                                </div> -->
+                                      <a href="https://www.amrita.edu/" target="_blank"><img src="images/amrita.jpg" class="col-xs-12 col-sm-3 payment-options color-gray"></a>
+
+                        <div class="col-xs-12 col-sm-4 address color-gray">
+                        <h5>Address</h5>
                                     <p>Amrita Vishwa Vidyapeetham, Ettimadai, Coimbatore, Tamil Nadu, PIN: 641112 </p>
                                     </div>
                                 <div class="col-xs-12 col-sm-5 additional-info color-gray">
