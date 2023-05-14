@@ -102,8 +102,48 @@
     font-size: 14px;
 }
 
+#CapsLock-On{
+    display: none;
+    position: absolute;
+    font-size: 15px;
+    margin: -10px 0 0 10px;
+    color: green;
+}
 
-	  </style>
+i.fa-user {
+    position: absolute;
+    font-size: 18px;
+    margin: -50px 0 0 215px;
+    color: grey;
+}
+
+i.fa-eye,
+i.fa-eye-slash,
+#pass{
+    position: absolute;
+    font-size: 18px;
+    /* margin-top: 10px;
+    margin-left: -100px; */
+    margin: -25px 0 0 105px;
+    color: grey;
+}
+
+#eye1 {
+    display: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+table {
+    color: black;
+    background-color: #d8e3e7;
+    border-radius: 3px;
+}
+
+
+</style>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -112,7 +152,27 @@
     <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/15f8b2b9b3.js" crossorigin="anonymous"></script>
   
+    <script>
+        function toggle() {
+            var x = document.getElementById("password");
+            var y = document.getElementById("eye1");
+            var z = document.getElementById("eye2");
+
+            if (x.type === 'password') {
+                x.type = "text";
+                y.style.display = "block";
+                y.style.color = "green";
+                z.style.display = "none";
+            } else {
+                x.type = "password";
+                y.style.display = "none";
+                z.style.display = "block";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -189,11 +249,46 @@ if(isset($_POST['submit']))
 	  <span style="color:red;"><?php echo $message; ?></span> 
    <span style="color:green;"><?php echo $success; ?></span>
     <form action="" method="post">
-      <input type="text" placeholder="Username"  name="username" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'>Your Complete Roll No, <br> <strong> Example: </strong> CB.EN.U4CSE20621 </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;" />
-      <input type="password" placeholder="Password" name="password" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'> Your domain password (or) your Amrita Wi-Fi password </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"/>
+        <br>
+      <!-- <input type="text" placeholder="Username"  name="username" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'>Your Complete Roll No, <br> <strong> Example: </strong> CB.EN.U4CSE20621 </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;" /> -->
+      <table>
+      <tr>
+        <th align="center" colspan="2"><input type="text" name="username" id="username" placeholder="Username" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'>Your Complete Roll No, <br> <strong> Example: </strong> CB.EN.U4CSE20621 </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"
+                size="35" autofocus required> <i class="far fa-user"></i></th>
+    </tr>
+
+      <tr>
+        <th align="center" colspan="2"><input type="password" name="password" id="password"
+                placeholder="Password" size="35" required onkeydown="capsverify(event)" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'> Your domain password (or) your Amrita Wi-Fi password </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"> <span id="pass"
+                onclick="toggle()"><i class="fas fa-eye" id="eye1"></i><i class="fas fa-eye-slash"
+                    id="eye2"></i></span></th>
+                </tr>
+      <!-- <input type="password" placeholder="Password" name="password" class="btn1 btn1-lg btn1-danger"  required onkeydown="capsverify(event)" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'> Your domain password (or) your Amrita Wi-Fi password </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"/> -->
+      <!-- <span onclick="toggle()"><i class="fas fa-eye" id="eye1"></i><i class="fas fa-eye-slash" id="eye2"></i></span> -->
+      <tr>
+        <td align="center" id="CapsLock-On" colspan="1"><span id="caps"><text id="text"><i
+                        class="fas fa-exclamation-circle" id="important"></i>&nbsp;CAPSLOCK Key Is Turned
+                    On!</text></span></td>
+      </tr>
+      </table>
+      <br>
       <input type="submit" id="buttn" name="submit" value="Login" />
     </form>
   </div>
+
+  <script>
+        function capsverify(event) {
+            var elem1 = event.getModifierState("CapsLock"); // if capslock is on it returns true otherwise false
+            if (elem1 == true) {
+                let val = document.getElementById("CapsLock-On");
+                val.style.display = "block";
+            } else {
+                let val = document.getElementById("CapsLock-On");
+                val.style.display = "none";
+            }
+        }
+
+    </script>
   
   <div class="cta">Forgot Password?<a href="edit.php" style="color:#5c4ac7;"> Reset </a></div>
 </div>
