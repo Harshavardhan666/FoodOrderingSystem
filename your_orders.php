@@ -220,8 +220,8 @@ only screen and (max-width: 760px),
 							  <th>Quantity</th>
 							  <th>Price</th>
 							   <th>Status</th>
-							     <th>Date</th>
-								   <th>Action</th>
+							    <th>Date</th>
+								
 							  
 							</tr>
 						  </thead>
@@ -245,19 +245,14 @@ only screen and (max-width: 760px),
 												<tr>	
 														 <td data-column="Item"> <?php echo $row['title']; ?></td>
 														  <td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
-														  <td data-column="price">$<?php echo $row['price']; ?></td>
+														  <td data-column="price">Rs <?php echo $row['price']; ?></td>
 														   <td data-column="status"> 
 														   <?php 
 																			$status=$row['status'];
-																			if($status=="" or $status=="NULL")
-																			{
-																			?>
-																			<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
-																		   <?php 
-																			  }
-																			   if($status=="in process")
+																			
+																			   if($status=="in process" or $status=="" or $status=="NULL")
 																			 { ?>
-																				<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button>
+																				<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> Preparing</button>
 																			<?php
 																				}
 																			if($status=="closed")
@@ -283,8 +278,7 @@ only screen and (max-width: 760px),
 														   
 														   </td>
 														  <td data-column="Date"> <?php echo $row['date']; ?></td>
-														   <td data-column="Action"> <a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-															</td>
+	
 														 
 												</tr>
 												

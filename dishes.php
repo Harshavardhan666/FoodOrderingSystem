@@ -154,7 +154,6 @@ $item_total += ($item["price"]*$item["quantity"]);
                                     <div class="price-wrap text-xs-center">
                                         <p>TOTAL</p>
                                         <h3 class="value"><strong><?php echo "Rs ".$item_total; ?></strong></h3>
-                                        <p>Free Delivery!</p>
                                         <?php
                                         if($item_total==0){
                                         ?>
