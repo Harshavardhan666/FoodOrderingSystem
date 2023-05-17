@@ -5,8 +5,44 @@ include("connection/connect.php");
 error_reporting(0);
 session_start();
 
-include_once 'product-action.php'; 
-
+if(isset($_POST['submit']))  
+{
+	// $old_pass = $_POST['old_pass'];
+    $old_pass = md5($_POST['old_pass']);
+	$new_pass = $_POST['new_pass'];
+    $confirm_pass = $_POST['confirm_pass'];
+	
+	if(!empty($_POST["submit"]))   
+     {
+        $loginquery ="SELECT password FROM users WHERE u_id=8"; //selecting matching records
+        $result=mysqli_query($db, $loginquery); //executing
+        $row=mysqli_fetch_array($result);
+        // password='".md5($password)."'
+        if($row['password']==$old_pass){
+            if($new_pass == $confirm_pass){
+                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id=8";
+                mysqli_query($db, $mql);
+                header("refresh:0.1;url=login.php");
+            }else{
+                echo "<script>alert('Both the passwords are not matching');</script>";
+            }
+        }else{
+            echo "<script>alert('WRONG PASSWORD');</script>"; 
+        }
+	
+	                        if(is_array($row)) 
+								{
+                                    	$_SESSION["user_id"] = $row['u_id']; 
+										 header("refresh:0, url=index.php"); 
+	                            } 
+							else
+							    {
+                                      	$message = "Invalid Username or Password!"; 
+                                }
+	 }
+	
+	
+}
 ?>
 
 
@@ -188,35 +224,44 @@ include_once 'product-action.php';
 </head>
 
 <body>
-    <header id="header" class="header-scroll top-header headrom" style="text-decoration: white;">
-        <nav class="navbar navbar-dark">
-            <div class="container">
-                <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">&#9776;</button>
-                <a class="navbar-brand" href="index.php"> <img class="img-rounded" src="images/icn.png" alt=""> </a>
-                <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"> <a class="nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link active" href="restaurants.php">Canteens <span class="sr-only"></span></a> </li>
+<header id="header" class="header-scroll top-header headrom">
+            <nav class="navbar navbar-dark">
+                <div class="container">
+                    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">&#9776;</button>
+                    <a class="navbar-brand" href="index.php"> <img class="img-rounded" src="images/icn.png" alt=""> </a>
+                    <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item"> <a class="nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link active" href="restaurants.php">Canteens <span class="sr-only"></span></a> </li>
+                            
+                           
+							<?php
+						if(empty($_SESSION["user_id"])) // if user is not login
+							{
+                                echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
+							}
+						else
+							{
 
-                        <?php
-                        if (empty($_SESSION["user_id"])) {
-                            echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Profile</a> </li>
-                                <li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
-                        } else {
+                                echo '<li class="nav-item"><a href="edit_profile.php" class="nav-link active">Profile</a> </li>';
 
+									echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">My Orders</a> </li>';
+									echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Logout</a> </li>';
+							}
 
-                            echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">My Orders</a> </li>';
-                            echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Logout</a> </li>';
-                        }
-
-                        ?>
-
-                    </ul>
+						?>
+							 
+                        </ul>
+						 
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
 
+        </header>
+    <?php 
+        $user= mysqli_query($db,"select * from users where u_id=8");
+        $rows=mysqli_fetch_array($user);
+ 	?> 
     <div class="page-wrapper">
     
 
@@ -227,74 +272,77 @@ include_once 'product-action.php';
                 <!-- edit form column -->
                 <div class="col-md-9 personal-info">
                     <h3>Personal info</h3>
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" action="" method="post">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>
-                            <!-- <div class="col-lg-8">
-                            <?php echo '<input class="form-control" type="text" value="$rows[f_name]" readonly>'?>
-                            </div> -->
+                            <div class="col-lg-8">
+                            <input class="form-control" type="text" value="<?php echo $rows["f_name"]; ?>" readonly>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Last name:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" value="Bishop" readonly>
+                                <input class="form-control" type="text" value="<?php echo $rows["l_name"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Admitted Branch:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" value="" readonly>
+                                <input class="form-control" type="text" value="<?php echo $rows["Admitted Branch"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Section:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" value="" readonly>
+                                <input class="form-control" type="text" value="<?php echo $rows["Section"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" value="janesemail@gmail.com" readonly>
+                                <input class="form-control" type="text" value="<?php echo $rows["email"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Username:</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="text" value="janeuser" readonly>
+                                <input class="form-control" type="text" value="<?php echo $rows["username"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Balance:</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="number" value="janeuser" readonly>
+                                <input class="form-control" type="number" value="<?php echo $rows["balance"]; ?>" readonly>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Current Password:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">New Password:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Confirm new password:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-8">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
-                                <span></span>
-                                <input type="reset" class="btn btn-default" value="Cancel">
-                            </div>
+                        
+                        <div id="hide">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Current Password:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" value="" name="old_pass" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">New Password:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" value="" name="new_pass" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Confirm new password:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" value="" name="confirm_pass" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-primary" name="submit" value=" Change Password">
+                                        <span></span>
+                                        <input type="reset" class="btn btn-default" value="Cancel">
+                                    </div>
+                                </div>
                         </div>
                         <br>
                     </form>
