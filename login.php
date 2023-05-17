@@ -89,7 +89,7 @@
                 y.style.display = "none";
                 z.style.display = "block";
             }
-        }
+        }4
     </script>
 
 </head>
@@ -108,15 +108,13 @@
 							<?php
 						if(empty($_SESSION["user_id"]))
 							{
-							  echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Edit</a> </li>';
-							}
-						else
-							{
-									
-									
-										echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">My Orders</a> </li>';
-									echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Logout</a> </li>';
-							}
+                                
+							}else
+                            {
+                                echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">My Orders</a> </li>';
+                                echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Edit</a> </li>';
+								echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Logout</a> </li>';
+                            }
 
 						?>
 							 

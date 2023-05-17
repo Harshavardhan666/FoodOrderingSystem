@@ -84,8 +84,9 @@ if(isset($_POST['submit'] ))
     <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/helper.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"> 
-
+    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    
     <style>
 
 .btn-inverse {
@@ -222,6 +223,77 @@ if(isset($_POST['submit'] ))
   box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
 }
 
+/* Base styles */
+/* Base styles */
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.offcanvas {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Initial position */
+  width: 250px;
+  height: 100%;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.offcanvas.open {
+  right: 0; /* Move into view */
+}
+
+.offcanvas-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Backdrop color and transparency */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.offcanvas.open ~ .offcanvas-background {
+  opacity: 1; /* Enable backdrop when offcanvas is open */
+  pointer-events: auto;
+}
+
+.offcanvas h2 {
+  margin-top: 0;
+}
+
+.offcanvas input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Button styles */
+
+#closeButton {
+  position: fixed;
+  top: 69px;
+  right: 0px;
+}
+
+#closeButton {
+  display: none;
+  background-color: red;
+}
+
+
+
     </style>
    </head>
 <body>
@@ -239,8 +311,7 @@ if(isset($_POST['submit'] ))
 							<?php
 						if(empty($_SESSION["user_id"]))
 							{
-								echo '<li class="nav-item"><a href="edit.php" class="nav-link active">Profile</a> </li>
-                              <li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
+								echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>';
 							}
 						else
 							{
@@ -305,10 +376,16 @@ if(isset($_POST['submit'] ))
                                 
                                  <div class="row">
                                     <div class="col-sm-4">
-                                       <input type="submit" value="Save" name="submit" class="btn btn-primary">
+                                       <ihput id="toggleButton" value="Send OTP" name="submit" class="btn btn-primary">
                                        <a href="edit.php" class="btn btn-inverse">Cancel</a>
+                                       <div id="offcanvas" class="offcanvas">
+                                          <button id="closeButton" class="btn btn-teritiary">Close</button>
+                                          <h2>Enter OTP</h2>
+                                          <input type="text" id="otpInput" placeholder="Enter OTP">
+                                       </div>
                                     </div>
                                  </div>
+
                               </form>
                   
 						   </div>
@@ -376,6 +453,20 @@ if(isset($_POST['submit'] ))
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/headroom.js"></script>
     <script src="js/foodpicky.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+      document.getElementById("toggleButton").addEventListener("click", function() {
+      document.getElementById("offcanvas").classList.add("open");
+      document.getElementById("closeButton").style.display = "block";
+      });
+
+      document.getElementById("closeButton").addEventListener("click", function() {
+      document.getElementById("offcanvas").classList.remove("open");
+      document.getElementById("closeButton").style.display = "none";
+      });
+
+    </script>
 </body>
 
 </html>
