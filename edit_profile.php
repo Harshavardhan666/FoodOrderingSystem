@@ -11,10 +11,10 @@ if(isset($_POST['submit']))
     $old_pass = md5($_POST['old_pass']);
 	$new_pass = $_POST['new_pass'];
     $confirm_pass = $_POST['confirm_pass'];
-	
+	$session=$_SESSION["user_id"]; 
 	if(!empty($_POST["submit"]))   
      {
-        $loginquery ="SELECT password FROM users WHERE u_id=8"; //selecting matching records
+        $loginquery ="SELECT password FROM users WHERE u_id='$session' "; //selecting matching records
         $result=mysqli_query($db, $loginquery); //executing
         $row=mysqli_fetch_array($result);
         // password='".md5($password)."'
@@ -258,8 +258,9 @@ if(isset($_POST['submit']))
             </nav>
 
         </header>
-    <?php 
-        $user= mysqli_query($db,"select * from users where u_id=8");
+    <?php
+        $session=$_SESSION["user_id"]; 
+        $user= mysqli_query($db,"select * from users where u_id='$session' ");
         $rows=mysqli_fetch_array($user);
  	?> 
     <div class="page-wrapper">
