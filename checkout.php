@@ -29,9 +29,9 @@ else{
 													if($_POST['submit'])
 													{
                                                         $session=$_SESSION["user_id"]; 
-                                                        $user= mysqli_query($db,"select balance from users where u_id='$session' ");
+                                                        $user= mysqli_query($db,"select balance,pin from users where u_id='$session' ");
                                                         $rows=mysqli_fetch_array($user); 
-                                                        if(($rows["balance"] - $item_total)>=0) {  
+                                                        if((($rows["balance"] - $item_total)>=0) && ($rows["pin"]==$_POST['pin']) ) {  
                                                             $bal=$rows["balance"]-$item_total;
                                                             $SQL= "UPDATE users SET balance=$bal WHERE u_id='".$_SESSION["user_id"]."'";
                                                             mysqli_query($db,$SQL);
@@ -44,8 +44,10 @@ else{
                                                             unset($item["price"]);
                                                             $success = "Thank you. Your order has been placed!";
                                                             function_alert();
+                                                        }else if($rows["pin"] != $_POST['pin']){
+                                                            echo "<script>alert('wrong pin');</script>";
                                                         }
-                                                        else{
+                                                        else {
                                                             echo "<script>alert('Insufficient Balance');</script>";
                                                         }	
 													}
@@ -216,7 +218,17 @@ else{
                                                     <input name="mod"  type="radio" value="paypal" disabled class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
                                             </li> -->
                                         </ul>
-                             
+                                        
+                                        <form class="form-horizontal" role="form" action="" method="post" id="myForm"> 
+                                            <div class="col-md-4">
+                                            <label class="control-label">Amrita E-Wallet PIN:</label>
+                                            <input class="form-control" type="password" value="****" max=4 name="pin" required>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
                                          <p class="text-xs-center"> <input type="submit" onclick="return confirm('Do you want to confirm the order?');" name="submit"  class="btn btn-success btn-block" value="Order Now"> </p>
                                     </div>
 									</form>
