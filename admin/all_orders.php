@@ -134,13 +134,13 @@ session_start();
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                     <thead class="thead-dark">
-                                            <tr>
+                                            <tr  style="text-align:center;">
                                                 <th>User</th>		
                                                 <th>Item Name</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
 												<th>Status</th>												
-												 <th>Reg-Date</th>
+												 <th>Order-Date</th>
 												  <th>Action</th>
 												 
                                             </tr>
@@ -163,7 +163,7 @@ session_start();
 																																							
 																				?>
 																				<?php
-																					echo ' <tr>
+																					echo ' <tr  style="text-align:center;">
 																					           <td>'.$rows['username'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['quantity'].'</td>

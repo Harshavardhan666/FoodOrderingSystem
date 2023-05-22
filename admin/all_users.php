@@ -128,7 +128,7 @@ session_start();
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped table-hover">
                                     <thead class="thead-dark">
-                                            <tr>
+                                            <tr style="text-align: center;">
                                                 <th>Username</th>
                                                 <th>FirstName</th>
                                                 <th>LastName</th>
@@ -156,12 +156,12 @@ session_start();
 																					
 																				
 																				
-																					echo ' <tr><td>'.$rows['username'].'</td>
+																					echo ' <tr  style="text-align:center;"><td>'.$rows['username'].'</td>
 																								<td>'.$rows['f_name'].'</td>
 																								<td>'.$rows['l_name'].'</td>
 																								<td>'.$rows['email'].'</td>
 																								<td>'.$rows['phone'].'</td>
-                                                                                                <td style="text-align:center;">'.$rows['balance'].'</td></tr>';
+                                                                                                <td  style="text-align:center;">'.$rows['balance'].'</td></tr>';
 																		}	
 														}
 											?>

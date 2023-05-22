@@ -194,12 +194,11 @@ if(isset($_POST['submit'] ))
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-hover table-striped">
                                         <thead class="thead-dark">
-                                            <tr>
+                                            <tr  style="text-align:center;">
                                                 <th>ID</th>
                                                 <th>Category Name</th>
                                                 <th>Date</th>
-                                              
-												  <th>Action</th>
+                                                <th  style="text-align:center;">Action</th>
 												 
                                             </tr>
                                         </thead>
@@ -221,11 +220,11 @@ if(isset($_POST['submit'] ))
 																					
 																				
 																				
-																					echo ' <tr><td>'.$rows['c_id'].'</td>
+																					echo ' <tr  style="text-align:center;"><td>'.$rows['c_id'].'</td>
 																								<td>'.$rows['c_name'].'</td>
 																								<td>'.$rows['date'].'</td>
 																								
-																									 <td><a href="delete_category.php?cat_del='.$rows['c_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+																									 <td  style="text-align:center;"> <a href="delete_category.php?cat_del='.$rows['c_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
 																									 <a href="update_category.php?cat_upd='.$rows['c_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
 																									</td></tr>';
 																					 

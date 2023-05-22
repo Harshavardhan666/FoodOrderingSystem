@@ -137,7 +137,7 @@ session_start();
                                 <div class="table-responsive m-t-40">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
-                                            <tr>
+                                            <tr  style="text-align:center;">
 											 <th>Category</th>
                                                 <th>Name</th>
 
@@ -170,7 +170,7 @@ session_start();
 																					$res=mysqli_query($db,$mql);
 																					$row=mysqli_fetch_array($res);
 																				
-																					echo ' <tr><td>'.$row['c_name'].'</td>
+																					echo ' <tr  style="text-align:center;"><td>'.$row['c_name'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								
 																								
