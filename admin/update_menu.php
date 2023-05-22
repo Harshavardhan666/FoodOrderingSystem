@@ -97,7 +97,8 @@ if(isset($_POST['submit']))           //if upload btn is pressed
     <meta http-equiv="X-UA-Compatible" content="IE=edge">  
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="">RestaurantAdd
+
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <title>Update Menu</title>
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -195,7 +196,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Menu to Canteen</h4>
+                                <h4 class="m-b-0 text-white">Update Menu to Canteen</h4>
                             </div>
                             <div class="card-body">
                                 <form action='' method='post'  enctype="multipart/form-data">
@@ -250,7 +251,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 											
 											 <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="control-label">Select Category</label>
+                                                    <label class="control-label">Select Canteen</label>
 													<select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
                                                         <option>--Select Canteen--</option>
                                                  <?php $ssql ="select * from restaurant";

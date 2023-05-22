@@ -138,7 +138,7 @@ session_start();
                                 <div class="table-responsive m-t-40">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead class="thead-dark">
-                                            <tr>
+                                            <tr style="text-align: center;">
 											 <th>Canteen</th>
                                                 <th>Item</th>
                                                 <th>Description</th>
@@ -165,17 +165,17 @@ session_start();
 																				$mql="select * from restaurant where rs_id='".$rows['rs_id']."'";
 																				$newquery=mysqli_query($db,$mql);
 																				$fetch=mysqli_fetch_array($newquery);
-																				
+																				 
 																				
 																					echo '<tr><td>'.$fetch['title'].'</td>
 																					
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['slogan'].'</td>
-																								<td>$'.$rows['price'].'</td>
+																								<td>Rs '.$rows['price'].'</td>
 																								
 																								
 																								<td><div class="col-md-3 col-lg-8 m-b-10">
-																								<center><img src="Res_img/dishes/'.$rows['img'].'" class="img-responsive  radius" style="max-height:100px;max-width:150px;" /></center>
+																							    <img src="Res_img/dishes/'.$rows['img'].'" class="img-responsive  radius" style="max-height:600px;max-width:600px;align:center;" />
 																								</div></td>
 																								
 																							
