@@ -4,49 +4,6 @@
 include("connection/connect.php"); 
 error_reporting(0);
 session_start();
-<<<<<<< Updated upstream
-
-if(isset($_POST['submit']))  
-{
-	// $old_pass = $_POST['old_pass'];
-    $old_pass = md5($_POST['old_pass']);
-	$new_pass = $_POST['new_pass'];
-    $confirm_pass = $_POST['confirm_pass'];
-	$session=$_SESSION["user_id"]; 
-	if(!empty($_POST["submit"]))   
-     {
-        $loginquery ="SELECT password FROM users WHERE u_id='$session' "; //selecting matching records
-        $result=mysqli_query($db, $loginquery); //executing
-        $row=mysqli_fetch_array($result);
-        // password='".md5($password)."'
-        if($row['password']==$old_pass){
-            if($new_pass == $confirm_pass){
-                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id='$session'";
-                $_SESSION["user_id"] = $session; 
-				header("refresh:0, url=index.php"); 
-                
-            }else{
-                echo "<script>alert('Both the passwords are not matching');</script>";
-            }
-        }else{
-            echo "<script>alert('WRONG PASSWORD');</script>"; 
-        }
-	
-	                        if(is_array($row)) 
-								{
-                                    	$_SESSION["user_id"] = $row['u_id']; 
-										 header("refresh:0, url=index.php"); 
-	                            } 
-							else
-							    {
-                                      	$message = "Invalid Username or Password!"; 
-                                }
-	 }
-	
-	
-}
-=======
->>>>>>> Stashed changes
 ?>
 
 <head>
