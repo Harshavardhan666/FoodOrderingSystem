@@ -362,7 +362,8 @@ session_start();
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">New Password:</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" value="" name="new_pass" required>
+                                        <input class="form-control" type="password" value="" name="new_pass" onkeyup="checkPasswordStrength(this.value)" required>
+                                        <div id="password-strength"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -466,6 +467,67 @@ session_start();
     <script src="js/headroom.js"></script>x
     <script src="js/foodpicky.min.js"></script>
     <script src="https://kit.fontawesome.com/15f8b2b9b3.js" crossorigin="anonymous"></script>
+
+<script>
+    function checkPasswordStrength(password) {
+        var strengthText = document.getElementById("password-strength");
+        var strengthIndicator = document.createElement("span");
+
+        if (password.length === 0) {
+            strengthText.innerHTML = "";
+            return;
+        }
+
+        var strength = 0;
+        if (password.length >= 6) {
+            strength += 1;
+        }
+        if (password.match(/[a-z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[A-Z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[0-9]/)) {
+            strength += 1;
+        }
+        if (password.match(/[$@#&!]/)) {
+            strength += 1;
+        }
+
+        switch (strength) {
+            case 0:
+                strengthIndicator.innerHTML = "Weak";
+                strengthIndicator.style.color = "red";
+
+                break;
+            case 1:
+                strengthIndicator.innerHTML = "Weak";
+                strengthIndicator.style.color = "red";
+                break;
+            case 2:
+                strengthIndicator.innerHTML = "Medium";
+                strengthIndicator.style.color = "orange";
+                break;
+            case 3:
+                strengthIndicator.innerHTML = "Strong";
+                strengthIndicator.style.color = "green";
+                break;
+            case 4:
+                strengthIndicator.innerHTML = "Very Strong";
+                strengthIndicator.style.color = "darkgreen";
+                break;
+            case 5:
+                strengthIndicator.innerHTML = "Excellent";
+                strengthIndicator.style.color = "darkgreen";
+                break;
+        }
+
+        strengthText.innerHTML = "<strong>Password Strength: </strong>";
+        strengthText.appendChild(strengthIndicator);
+    }
+    </script>
+    
     <script>
 
         function togglePasswordFields() {

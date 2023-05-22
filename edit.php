@@ -59,27 +59,6 @@ include("connection/connect.php");
 
 // }
 
-if (isset($_POST['submit'])) {
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
-  $password = $_POST['password'];
-
-  // Check if the provided information exists in the users table
-  $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone' AND password='".md5($password)."'";
-  $result = mysqli_query($db, $query);
-
-  if (mysqli_num_rows($result) > 0) {
-    // Information exists in the database
-    // Perform further actions (e.g., send OTP, reset account, etc.)
-    // Add your code here
-    echo "Information Exists in the Database.";
-  } else {
-    // Information does not exist in the database
-    echo "Invalid Credentials!";
-  }
-}
-
 ?>
 
 <head>
@@ -260,6 +239,67 @@ body {
   margin-left: -190px;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .modal-content {
+  background-color: #f9f9f9;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  }
+
+  .close:hover,
+  .close:focus {
+  color: #333;
+  }
+
+  .modal-content p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
+  }
+
+  .modal-content p:first-of-type {
+  margin-bottom: 20px;
+  }
+
+  .modal-content p:last-of-type {
+  text-align: center;
+  }
+
+  .modal-content p:last-of-type a {
+  color: #007bff;
+  text-decoration: none;
+  }
+
+  .modal-content p:last-of-type a:hover {
+  text-decoration: underline;
+  }
+
 
     </style>
    </head>
@@ -316,26 +356,30 @@ body {
                 <div id="form">
                               <div class="row">
 								                    <div class="form-group col-sm-7">
-                                       <label for="exampleInputEmail1">User-Name</label>
-                                       <input class="form-control" type="text" name="username" id="example-text-input" required> 
+                                       <label for="username">User-Name</label>
+                                       <input class="form-control" type="text" name="username" id="username" required> 
                                     </div>
                            
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Email Address</label>
-                                       <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required> 
+                                       <label for="email">Email Address</label>
+                                       <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" required> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Phone number</label>
-                                       <input class="form-control" type="text" name="phone" id="example-tel-input-3" required> 
+                                       <label for="mobile">Phone number</label>
+                                       <input class="form-control" type="text" name="phone" id="mobile" required> 
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <!-- <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword1">Password</label>
                                        <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
+                                    </div> -->
+                                    <div class="form-group col-sm-6">
+                                       <label for="exampleInputPassword1">New Password</label>
+                                       <input type="password" class="form-control" name="newpassword" id="exampleInputPassword1" onkeyup="checkPasswordStrength(this.value)" required> 
+                                       <div id="password-strength"></div>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputPassword1">New password</label>
-                                       <input type="password" class="form-control" name="newpassword" id="exampleInputPassword2" onkeyup="checkPasswordStrength(this.value)" required> 
-                                       <div id="password-strength"></div>
+                                       <label for="exampleInputPassword2">Confirm Password</label>
+                                       <input type="password" class="form-control" name="confpass" id="exampleInputPassword2" required>
                                     </div>
                                    
                             </div>
@@ -349,6 +393,16 @@ body {
                                       <button type="button" name="cancel" class="btn btn-primary" onclick="redirect()" id="canbtn">Cancel</button>
                                     </div>
                                  </div>
+
+                                 <div id="myModal" class="modal">
+                                        <div class="modal-content">
+                                            <!-- <span class="close" onclick="hideModal();">&times;</span> -->
+                                            <!-- <div class="modal-icon modal-success"><i class="fa-solid fa-badge-check fa-2xs"></i></div> -->
+
+                                            <p id="modalContent">Modal Content</p>
+                                          </div>
+
+                                  </div>
 
                 </div>
 
@@ -501,6 +555,39 @@ body {
     }
     </script>
 
+    <script>
+      function showModal(content) {
+            // console.log("Showing modal with message:", content);
+            document.getElementById("modalContent").textContent = content;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // function hideModal() {
+        //     // console.log("Closing modal");
+        //     document.getElementById("myModal").style.display = "none";
+        //     // window.location.href = "edit_profile.php";
+        // }
+
+        // setTimeout(showModal, delayInMilliseconds);
+
+
+            // Function to redirect to a specific page
+            function redirectToPage(delayInMilliseconds) {
+                settime(delayInMilliseconds);
+            }
+
+            // Set the timer to redirect after the delay
+            function settime(delayInMilliseconds){
+                setTimeout(page, delayInMilliseconds);
+            }
+
+            function page(){
+                window.location.href = "edit.php";
+            }
+          
+           
+    </script>
+
        
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
@@ -512,6 +599,38 @@ body {
     <script src="js/foodpicky.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    
+    <?php
+
+        if (isset($_POST['submit'])) {
+          $username = $_POST['username'];
+          $email = $_POST['email'];
+          $phone = $_POST['phone'];
+          $newpassword = $_POST['newpassword'];
+          $confirmpassword = $_POST['confpass'];
+
+          if ($newpassword != $confirmpassword) {
+            echo '<script>showModal("Passwords Doesn\'t Match"); redirectToPage(1000)</script>'; 
+          } else {
+            // Passwords match, continue with further actions
+
+            // Check if the provided information exists in the users table
+            $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone'";
+            $result = mysqli_query($db, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+              // Information exists in the database
+              // Perform further actions (e.g., send OTP, reset account, etc.)
+              // Add your code here
+              echo "Information Exists in the Database.";
+            } else {
+              // Information does not exist in the database
+              echo "Invalid Credentials!";
+            }
+          }
+        }
+
+    ?>
 
 </body>
 
