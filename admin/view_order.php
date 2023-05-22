@@ -195,15 +195,14 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 													<td><strong>Status:</strong></td>
 													<?php 
 																			$status=$rows['status'];
-																			if($status=="" or $status=="NULL")
-																			{
+																			
+																			
 																			?>
-																			<td> <center><button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button></center></td>
 																		   <?php 
-																			  }
-																			   if($status=="in process")
+																			  
+																			   if($status=="in process" or $status=="" or $status=="NULL")
 																			 { ?>
-																			<td>   <center><button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span>On a Way!</button></center></td> 
+																			<td>   <center><button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span>Preparing</button></center></td> 
 																			<?php
 																				}
 																			if($status=="closed")

@@ -135,7 +135,7 @@ session_start();
                                                 <th>Email</th>
                                                 <th>Phone</th>
 												<!-- <th>Address</th>												 -->
-												 <th>Reg-Date</th>
+                                                 <th>Balance</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -161,8 +161,7 @@ session_start();
 																								<td>'.$rows['l_name'].'</td>
 																								<td>'.$rows['email'].'</td>
 																								<td>'.$rows['phone'].'</td>
-																																														
-																								<td>'.$rows['date'].'</td></tr>';
+                                                                                                <td style="text-align:center;">'.$rows['balance'].'</td></tr>';
 																		}	
 														}
 											?>

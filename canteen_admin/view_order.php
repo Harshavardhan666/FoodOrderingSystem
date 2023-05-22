@@ -224,7 +224,7 @@ if (strlen($_SESSION['user_id']) == 0) {
                                                 
                                                 if ($status == "in process" or $status == "" or $status == "NULL") { ?>
                                                     <td>
-                                                        <center><button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin" aria-hidden="true"></span>On a Way!</button></center>
+                                                        <center><button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin" aria-hidden="true"></span>Prepared</button></center>
                                                     </td>
                                                 <?php
                                                 }

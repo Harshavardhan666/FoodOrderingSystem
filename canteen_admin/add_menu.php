@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == '' || $_POST['res_name'] == '') {
+    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == '') {
         $error =     '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>All fields Must be Fillup!</strong>
@@ -241,8 +241,8 @@ if (isset($_POST['submit'])) {
 
 
 
-
-                                        <div class="col-md-12">
+                                        <br>
+                                        <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="control-label">Select Restaurant</label>
                                                 <select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
@@ -256,7 +256,7 @@ if (isset($_POST['submit'])) {
                                                     ?>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
 
 
 

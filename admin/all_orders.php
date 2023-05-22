@@ -171,15 +171,13 @@ session_start();
 																								?>
 																								<?php 
 																			$status=$rows['status'];
-																			if($status=="" or $status=="NULL")
-																			{
+																			
 																			?>
-																			<td> <button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button></td>
 																		   <?php 
-																			  }
-																			   if($status=="in process")
+																			  
+																			   if($status=="in process" or $status=="" or $status=="NULL")
 																			 { ?>
-																			<td> <button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button></td> 
+																			<td> <button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span>Preparing</button></td> 
 																			<?php
 																				}
 																			if($status=="closed")

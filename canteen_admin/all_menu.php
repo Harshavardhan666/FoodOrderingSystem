@@ -127,7 +127,6 @@ session_start();
                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Restaurant</th>
                                             <th>Dish</th>
                                             <th>Description</th>
                                             <th>Price</th>
@@ -151,7 +150,7 @@ session_start();
                                                 $fetch = mysqli_fetch_array($newquery);
 
 
-                                                echo '<tr><td>' . $fetch['title'] . '</td>
+                                                echo '<tr>
 																					
 																								<td>' . $rows['title'] . '</td>
 																								<td>' . $rows['slogan'] . '</td>
