@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">        
 <?php
 include("connection/connect.php"); 
 error_reporting(0);
 session_start();
+<<<<<<< Updated upstream
 
 if(isset($_POST['submit']))  
 {
@@ -44,9 +45,9 @@ if(isset($_POST['submit']))
 	
 	
 }
+=======
+>>>>>>> Stashed changes
 ?>
-
-
 
 <head>
     <meta charset="utf-8">
@@ -56,16 +57,20 @@ if(isset($_POST['submit']))
     <meta name="author" content="">
     <link rel="icon" href="#">
     <title>Edit</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animsition.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
 
     <style>
+
         .btn-inverse {
             background: #2f3d4a;
             border: 1px solid #2f3d4a;
@@ -221,7 +226,74 @@ if(isset($_POST['submit']))
             -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
             box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
         }
-    </style>
+
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+        background-color: #f9f9f9;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #333;
+        }
+
+        .modal-content p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.5;
+        color: #333;
+        }
+
+        .modal-content p:first-of-type {
+        margin-bottom: 20px;
+        }
+
+        .modal-content p:last-of-type {
+        text-align: center;
+        }
+
+        .modal-content p:last-of-type a {
+        color: #007bff;
+        text-decoration: none;
+        }
+
+        .modal-content p:last-of-type a:hover {
+        text-decoration: underline;
+        }
+
+        #canbtn {
+            margin-left: -140px;
+        }
+
+</style>
 </head>
 
 <body>
@@ -243,7 +315,6 @@ if(isset($_POST['submit']))
 							}
 						else
 							{
-
                                 echo '<li class="nav-item"><a href="edit_profile.php" class="nav-link active">Profile</a> </li>';
 
 									echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">My Orders</a> </li>';
@@ -268,13 +339,14 @@ if(isset($_POST['submit']))
     
 
         <div class="container">
+            <br>
             <h1>Edit Profile</h1>
             <hr>
             <div class="row">
                 <!-- edit form column -->
                 <div class="col-md-9 personal-info">
                     <h3>Personal info</h3>
-                    <form class="form-horizontal" role="form" action="" method="post">
+                    <form class="form-horizontal" role="form" action="" method="post" id="myForm">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>
                             <div class="col-lg-8">
@@ -285,6 +357,12 @@ if(isset($_POST['submit']))
                             <label class="col-lg-3 control-label">Last name:</label>
                             <div class="col-lg-8">
                                 <input class="form-control" type="text" value="<?php echo $rows["l_name"]; ?>" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Academic Program:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="<?php echo $rows["Academic Program"]; ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -317,8 +395,7 @@ if(isset($_POST['submit']))
                                 <input class="form-control" type="number" value="<?php echo $rows["balance"]; ?>" readonly>
                             </div>
                         </div>
-                        
-                        <div id="hide">
+                        <div id="passwordFields" style="display: none;">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Current Password:</label>
                                     <div class="col-md-8">
@@ -332,27 +409,52 @@ if(isset($_POST['submit']))
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Confirm new password:</label>
+                                    <label class="col-md-3 control-label">Confirm New password:</label>
                                     <div class="col-md-8">
                                         <input class="form-control" type="password" value="" name="confirm_pass" required>
                                     </div>
                                 </div>
+                            </div>
+                              
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="submit" class="btn btn-primary" name="submit" value="Change Password" id="chpas" style="display: none;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary" name="cancel" onclick="cancelClick()" style="display: none;" id="canbtn">Cancel</button>
+                                    </div>
+                                    </div>
+                                    <span></span>
+                                    <div id="myModal" class="modal">
+                                        <div class="modal-content">
+                                            <!-- <span class="close" onclick="hideModal();">&times;</span> -->
+                                            <!-- <div class="modal-icon modal-success"><i class="fa-solid fa-badge-check fa-2xs"></i></div> -->
+
+                                            <p id="modalContent">Modal Content</p>
+                                        </div>
+
+                                        </div>
+                                </div>
+                            </div>
+
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"></label>
                                     <div class="col-md-8">
-                                        <input type="submit" class="btn btn-primary" name="submit" value=" Change Password">
-                                        <span></span>
-                                        <input type="reset" class="btn btn-default" value="Cancel">
-                                    </div>
+                                    <button type="button" class="btn btn-primary" name="editPassword" onclick="togglePasswordFields()">Edit Password</button>
                                 </div>
-                        </div>
+                            </div>
                         <br>
                     </form>
+                <!-- <button type="button" onclick="editaccess()" class="btn btn-primary" style = "margin-left: 240px" id="editBtn">Edit Password</button> -->
                 </div>
             </div>
         </div>
 
-
+        <br><br><br><br>
         <footer class="footer">
             <div class="container">
 
@@ -397,16 +499,128 @@ if(isset($_POST['submit']))
             </div>
         </footer>
 
-    </div>
-
+    </div>  
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/animsition.min.js"></script>
     <script src="js/bootstrap-slider.min.js"></script>
     <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/headroom.js"></script>
+    <script src="js/headroom.js"></script>x
     <script src="js/foodpicky.min.js"></script>
+    <script src="https://kit.fontawesome.com/15f8b2b9b3.js" crossorigin="anonymous"></script>
+    <script>
+
+        function togglePasswordFields() {
+            var passwordFields = document.getElementById("passwordFields");
+            var editPasswordButton = document.getElementsByName("editPassword")[0];
+
+            if (passwordFields.style.display === "none") {
+            passwordFields.style.display = "block";
+            // editPasswordButton.textContent = "Hide Password";
+            editPasswordButton.style.display = "none";
+            document.getElementById("chpas").style.display = "block";
+            document.getElementById("canbtn").style.display = "block";
+            } 
+        }
+
+        function cancelClick() {
+            var passwordFields = document.getElementById("passwordFields");
+            var editPasswordButton = document.getElementsByName("editPassword")[0];
+            editPasswordButton.style.display = "block";
+            passwordFields.style.display = "none";
+            document.getElementById("chpas").style.display = "none";
+            document.getElementById("canbtn").style.display = "none";
+    }
+
+        // const delayInMilliseconds = 5000;
+        function showModal(content) {
+            // console.log("Showing modal with message:", content);
+            document.getElementById("modalContent").textContent = content;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // function hideModal() {
+        //     // console.log("Closing modal");
+        //     document.getElementById("myModal").style.display = "none";
+        //     // window.location.href = "edit_profile.php";
+        // }
+
+        // setTimeout(showModal, delayInMilliseconds);
+
+
+            // Function to redirect to a specific page
+            function redirectToPage(delayInMilliseconds) {
+                settime(delayInMilliseconds);
+            }
+
+            // Set the timer to redirect after the delay
+            function settime(delayInMilliseconds){
+                setTimeout(page, delayInMilliseconds);
+            }
+
+            function page(){
+                window.location.href = "logout.php";
+            }
+
+            function redirectToPage1(delayInMilliseconds) {
+                settime1(delayInMilliseconds);
+            }
+
+            // Set the timer to redirect after the delay
+            function settime1(delayInMilliseconds){
+                setTimeout(page1, delayInMilliseconds);
+            }
+
+            function page1(){
+                window.location.href = "edit_profile.php";
+            }
+
+</script> 
+
+<?php
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']))  
+{
+	// $old_pass = $_POST['old_pass'];
+    $old_pass = md5($_POST['old_pass']);
+	$new_pass = $_POST['new_pass'];
+    $confirm_pass = $_POST['confirm_pass'];
+	
+	if(!empty($_POST["submit"]))   
+     {
+        $loginquery ="SELECT password FROM users WHERE u_id=8"; //selecting matching records
+        $result=mysqli_query($db, $loginquery); //executing
+        $row=mysqli_fetch_array($result);
+        // password='".md5($password)."'
+        if($row['password']==$old_pass){
+            if($new_pass == $confirm_pass){
+                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id=8";
+                mysqli_query($db, $mql);
+                // header("refresh:0.1;url=login.php");
+                // echo '<div class="modal-icon modal-success"><i class="fas fa-check-circle"></i></div>';
+                echo '<script>showModal("Password Updated Successfully"); redirectToPage(1000);</script>';
+                
+                exit;
+            }else{
+                // echo "<script>alert('Both the passwords are not matching');</script>";
+                // echo "<script>document.getElementById('myModal').style.display = 'block'; document.getElementById('modalContent').innerText = 'Pass doesn\'t match';</script>";
+                // echo '<script> window.location.reload();</script>';
+                // echo '<div class="modal-icon modal-success"><i class="fas fa-check-circle"></i></div>';
+                echo '<script>showModal("Pass doesn\'t match"); redirectToPage1(1000)</script>';
+                // console.log("Passwords don't match");\
+            }
+        }else{
+            // echo "<script>alert('WRONG PASSWORD');</script>"; 
+            // echo '<script>document.getElementById("myModal").style.display = "block"; document.getElementById("modalContent").innerText = "Wrong Pass";</script>';
+            // echo '<script> window.location.reload(true);</script>';
+            // echo '<div class="modal-icon modal-success"><i class="fas fa-check-circle"></i></div>';
+            echo '<script>showModal("Wrong Pass"); redirectToPage1(1000)</script>';
+            // console.log("Wrong password");
+        }
+	 }
+}
+?>
+
 </body>
 
 </html>

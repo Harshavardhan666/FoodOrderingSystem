@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="css/login.css">
 
     <style type="text/css">
+
     #buttn{
         color:#fff;
         background-color: #5c4ac7;
     }
 
-    .popover { 
+.popover { 
   position: absolute;
   top: 0;
   left: 0;
@@ -61,6 +62,10 @@
   border-width: 10px 10px 10px 0;
 }
 
+/* #CapsLock-On{
+    display: hidden;
+} */
+
     </style>
 
 
@@ -89,7 +94,7 @@
                 y.style.display = "none";
                 z.style.display = "block";
             }
-        }4
+        }
     </script>
 
 </head>
@@ -125,10 +130,11 @@
         </header>
 <div style=" background-image: url('images/img/pimg.jpg');">
 
-<?php
+<?php 
 include("connection/connect.php"); 
 error_reporting(0); 
 session_start(); 
+$count = 0;
 if(isset($_POST['submit']))  
 {
 	$username = $_POST['username'];
@@ -144,11 +150,21 @@ if(isset($_POST['submit']))
 								{
                                     	$_SESSION["user_id"] = $row['u_id']; 
 										 header("refresh:0, url=index.php"); 
-	                            } 
+	                            }
+
 							else
 							    {
+                                        $count++;
                                       	$message = "Invalid Username or Password!"; 
+
+                                          if($count>=3)
+                                          {
+                                            header("refresh:0, url=edit.php"); 
+                                            exit();
+                                          }
                                 }
+                                
+                                
 	 }
 	
 	
@@ -157,10 +173,9 @@ if(isset($_POST['submit']))
   
 
 <div class="pen-title">
-  <
 </div>
 
-<div class="module form-module">
+<div class="module form-module ">
   <div class="toggle">
    
   </div>
@@ -173,23 +188,25 @@ if(isset($_POST['submit']))
         <table>
         <tr>
         <th align="center" colspan="2"><input type="text" name="username" id="username" placeholder="Username" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'>Your Complete Roll No, <br> <strong> Example: </strong> CB.EN.U4CSE20621 </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"
-                size="35" autofocus required> <i class="far fa-user"></i></th>
+                size="35" autofocus required></th>
         </tr>
 
         <tr>
         <th align="center" colspan="2"><input type="password" name="password" id="password"
                 placeholder="Password" size="35" required onkeydown="capsverify(event)" class="btn1 btn1-lg btn1-danger" data-container = "body" data-toggle="popover" data-placement="right" data-html="true" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>' data-content="<p class = 'my-class'> Your domain password (or) your Amrita Wi-Fi password </p>" data-trigger = "hover" style = "max-width: 400px opacity: 1;"> <span id="pass"
-                onclick="toggle()"><i class="fas fa-eye" id="eye1"></i><i class="fas fa-eye-slash"
-                    id="eye2"></i></span></th>
+                onclick="toggle()"></span></th>
                 </tr>
+
       <!-- <input type="text" placeholder="Username"  name="username"/> -->
       <!-- <input type="password" placeholder="Password" name="password"/> -->
 
-      <tr>
-        <td align="center" id="CapsLock-On" colspan="1"><span id="caps"><text id="text"><i
+      <!-- <tr>
+        <td align="center" id="CapsLock-On" colspan="1"><span id="caps"><text id="text"><p style="display: hidden;"><i
                         class="fas fa-exclamation-circle" id="important"></i>&nbsp;CAPSLOCK Key Is Turned
-                    On!</text></span></td>
-      </tr>
+                    On!</p></text></span></td>
+      </tr> -->
+
+
       </table>
       <input type="submit" id="buttn" name="submit" value="Login" />
     </form>

@@ -6,70 +6,81 @@ session_start();
 error_reporting(0); 
 include("connection/connect.php"); 
 
-if(isset($_POST['submit'] )) 
-{
+// if(isset($_POST['submit'] )) 
+// {
 
-     if(empty($_POST['username']) || empty($_POST['firstname']) || 
-   	    empty($_POST['lastname'])|| 
-		empty($_POST['email']) ||  
-		empty($_POST['phone'])||
-		empty($_POST['password'])||
-		empty($_POST['cpassword']) ||
-		empty($_POST['cpassword']))
-		{
-			$message = "All fields must be Required!";
-		}
-	else
-	{
+//      if(empty($_POST['username']) || 
+// 		empty($_POST['email']) ||  
+// 		empty($_POST['phone'])||
+// 		empty($_POST['password']))
+// 		{
+// 			$message = "All Fields Must Be Required!";
+// 		}
+// 	else
+// 	{
 	
-	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
-	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
-		
-   // if(!(preg_match('/^[C]{1}[B]{1}[.]{1}[E]{1}[N]{1}[.]{1}[U]{1}[4]{1}[CSE20]{5}[012346]{1}[0-6]{1}[0-9]{1}$/', $_POST['username']))){
-
-   //       echo "<script>alert('Invalid Username');</script>";
-   // }
+// 	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
+// 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
 	
-	if($_POST['password'] != $_POST['newpassword']){
+// 	if($_POST['password'] != $_POST['newpassword']){
        	
-          echo "<script>alert('Password not match');</script>"; 
-    }
-	elseif(strlen($_POST['password']) < 6)  
-	{
-      echo "<script>alert('Password Must be >=6');</script>"; 
-	}
-	elseif(strlen($_POST['phone']) < 10)  
-	{
-      echo "<script>alert('Invalid phone number!');</script>"; 
-	}
+//           echo "<script>alert('Password Doesn't Match');</script>"; 
+//     }
+// 	elseif(strlen($_POST['password']) < 6)  
+// 	{
+//       echo "<script>alert('Password Must be >=6');</script>"; 
+// 	}
+// 	elseif(strlen($_POST['phone']) < 10)  
+// 	{
+//       echo "<script>alert('Invalid phone number!');</script>"; 
+// 	}
 
-    elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
-    {
-          echo "<script>alert('Invalid email address please type a valid email!');</script>"; 
-    }
-	elseif(mysqli_num_rows($check_username) > 0) 
-     {
-       echo "<script>alert('Username Already exists!');</script>"; 
-     }
-	elseif(mysqli_num_rows($check_email) > 0) 
-     {
-       echo "<script>alert('Email Already exists!');</script>"; 
-     }
-	else{
+//     elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
+//     {
+//           echo "<script>alert('Invalid email address please type a valid email!');</script>"; 
+//     }
+// 	elseif(mysqli_num_rows($check_username) > 0) 
+//      {
+//        echo "<script>alert('Username Already exists!');</script>"; 
+//      }
+// 	elseif(mysqli_num_rows($check_email) > 0) 
+//      {
+//        echo "<script>alert('Email Already exists!');</script>"; 
+//      }
+// 	else{
        
 	 
-	$mql = "INSERT INTO users(username,f_name,l_name,email,phone,password) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone']."','".md5($_POST['password'])."')";
-	mysqli_query($db, $mql);
+// 	$mql = "INSERT INTO users(username,f_name,l_name,email,phone,password) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone']."','".md5($_POST['password'])."')";
+// 	mysqli_query($db, $mql);
 	
-		 header("refresh:0.1;url=login.php");
-    }
-	}
+// 		 header("refresh:0.1;url=login.php");
+//     }
+// 	}
 
+// }
+
+if (isset($_POST['submit'])) {
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+  $password = $_POST['password'];
+
+  // Check if the provided information exists in the users table
+  $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone' AND password='".md5($password)."'";
+  $result = mysqli_query($db, $query);
+
+  if (mysqli_num_rows($result) > 0) {
+    // Information exists in the database
+    // Perform further actions (e.g., send OTP, reset account, etc.)
+    // Add your code here
+    echo "Information Exists in the Database.";
+  } else {
+    // Information does not exist in the database
+    echo "Invalid Credentials!";
+  }
 }
 
-
 ?>
-
 
 <head>
     <meta charset="utf-8">
@@ -232,53 +243,6 @@ body {
   overflow-x: hidden;
 }
 
-.offcanvas {
-  position: fixed;
-  top: 0;
-  right: -250px; /* Initial position */
-  width: 250px;
-  height: 100%;
-  background-color: #f8f8f8;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: right 0.3s ease-in-out;
-  padding: 20px;
-  box-sizing: border-box;
-  z-index: 2;
-}
-
-.offcanvas.open {
-  right: 0; /* Move into view */
-}
-
-.offcanvas-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Backdrop color and transparency */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 1;
-}
-
-.offcanvas.open ~ .offcanvas-background {
-  opacity: 1; /* Enable backdrop when offcanvas is open */
-  pointer-events: auto;
-}
-
-.offcanvas h2 {
-  margin-top: 0;
-}
-
-.offcanvas input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
 /* Button styles */
 
 #closeButton {
@@ -292,6 +256,9 @@ body {
   background-color: red;
 }
 
+#canbtn {
+  margin-left: -190px;
+}
 
 
     </style>
@@ -344,52 +311,63 @@ body {
                         <div class="widget" >
                            <div class="widget-body">
                             
-							  <form action="" method="post">
-                                 <div class="row">
-								  <div class="form-group col-sm-7">
+							  <form action="edit.php" method="post" onsubmit="return toggle()" >
+                <h2 style="text-align: center; color: #8050C7; font-family: Arial, sans-serif; font-size: 30px">Reset Your Account</h2>
+                <div id="form">
+                              <div class="row">
+								                    <div class="form-group col-sm-7">
                                        <label for="exampleInputEmail1">User-Name</label>
-                                       <input class="form-control" type="text" name="username" id="example-text-input"> 
+                                       <input class="form-control" type="text" name="username" id="example-text-input" required> 
                                     </div>
                            
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">Email Address</label>
-                                       <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp"> 
+                                       <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required> 
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">Phone number</label>
-                                       <input class="form-control" type="text" name="phone" id="example-tel-input-3"> 
+                                       <input class="form-control" type="text" name="phone" id="example-tel-input-3" required> 
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword1">Password</label>
-                                       <input type="password" class="form-control" name="password" id="exampleInputPassword1"> 
+                                       <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword1">New password</label>
-                                       <input type="password" class="form-control" name="newpassword" id="exampleInputPassword2"> 
+                                       <input type="password" class="form-control" name="newpassword" id="exampleInputPassword2" onkeyup="checkPasswordStrength(this.value)" required> 
+                                       <div id="password-strength"></div>
                                     </div>
-									 <!-- <div class="form-group col-sm-12">
-                                       <label for="exampleTextarea">Delivery Address</label>
-                                       <textarea class="form-control" id="exampleTextarea"  name="address" rows="3"></textarea>
-                                    </div> -->
                                    
-                                 </div>
+                            </div>
                                 
                                  <div class="row">
-                                    <div class="col-sm-4">
-                                       <ihput id="toggleButton" value="Send OTP" name="submit" class="btn btn-primary">
-                                       <a href="edit.php" class="btn btn-inverse">Cancel</a>
-                                       <div id="offcanvas" class="offcanvas">
-                                          <button id="closeButton" class="btn btn-teritiary">Close</button>
-                                          <h2>Enter OTP</h2>
-                                          <input type="text" id="otpInput" placeholder="Enter OTP">
-                                       </div>
+                                    <div class="col-sm-3">
+                                       <input type="submit" class="btn btn-primary" name="submit" value="Send OTP">
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                      <button type="button" name="cancel" class="btn btn-primary" onclick="redirect()" id="canbtn">Cancel</button>
                                     </div>
                                  </div>
 
-                              </form>
+                </div>
+
+                          <!-- <div id="inputOTP" style="display: none;">
+                            <div class="row">
+                                  <div class="form-group col-sm-6">
+                                       <label for="otp">Enter OTP: </label>
+                                       <input type="text" class="form-control" name="otp" id="otp" required style="width: 180px;">
+                                  </div>
+                                
+                                <div class="form-group col-sm-7">
+                                  <button type="button" class="btn btn-primary" name="chpassbtn" id="chpass"> Change Password </button>
+                                </div>
+                            </div>
+                          </div> -->
+                      </form>
+                        
                   
 						   </div>
-           
                         </div>
                      
                      </div>
@@ -444,6 +422,85 @@ body {
             </footer>
          
          </div>
+
+    <script>
+
+        function toggle(){
+
+              document.getElementById("form").style.display = "none";
+              document.getElementById("inputOTP").style.display = "block";
+      }
+
+    </script>
+    
+    <script>
+      
+      function redirect() {
+        window.location.href = "login.php";
+      }
+
+    </script>
+
+    <script>
+    function checkPasswordStrength(password) {
+        var strengthText = document.getElementById("password-strength");
+        var strengthIndicator = document.createElement("span");
+
+        if (password.length === 0) {
+            strengthText.innerHTML = "";
+            return;
+        }
+
+        var strength = 0;
+        if (password.length >= 6) {
+            strength += 1;
+        }
+        if (password.match(/[a-z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[A-Z]/)) {
+            strength += 1;
+        }
+        if (password.match(/[0-9]/)) {
+            strength += 1;
+        }
+        if (password.match(/[$@#&!]/)) {
+            strength += 1;
+        }
+
+        switch (strength) {
+            case 0:
+                strengthIndicator.innerHTML = "Weak";
+                strengthIndicator.style.color = "red";
+
+                break;
+            case 1:
+                strengthIndicator.innerHTML = "Weak";
+                strengthIndicator.style.color = "red";
+                break;
+            case 2:
+                strengthIndicator.innerHTML = "Medium";
+                strengthIndicator.style.color = "orange";
+                break;
+            case 3:
+                strengthIndicator.innerHTML = "Strong";
+                strengthIndicator.style.color = "green";
+                break;
+            case 4:
+                strengthIndicator.innerHTML = "Very Strong";
+                strengthIndicator.style.color = "darkgreen";
+                break;
+            case 5:
+                strengthIndicator.innerHTML = "Excellent";
+                strengthIndicator.style.color = "darkgreen";
+                break;
+        }
+
+        strengthText.innerHTML = "<strong>Password Strength: </strong>";
+        strengthText.appendChild(strengthIndicator);
+    }
+    </script>
+
        
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
@@ -455,18 +512,7 @@ body {
     <script src="js/foodpicky.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script>
-      document.getElementById("toggleButton").addEventListener("click", function() {
-      document.getElementById("offcanvas").classList.add("open");
-      document.getElementById("closeButton").style.display = "block";
-      });
 
-      document.getElementById("closeButton").addEventListener("click", function() {
-      document.getElementById("offcanvas").classList.remove("open");
-      document.getElementById("closeButton").style.display = "none";
-      });
-
-    </script>
 </body>
 
 </html>
