@@ -20,9 +20,10 @@ if(isset($_POST['submit']))
         // password='".md5($password)."'
         if($row['password']==$old_pass){
             if($new_pass == $confirm_pass){
-                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id=8";
-                mysqli_query($db, $mql);
-                header("refresh:0.1;url=login.php");
+                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id='$session'";
+                $_SESSION["user_id"] = $session; 
+				header("refresh:0, url=index.php"); 
+                
             }else{
                 echo "<script>alert('Both the passwords are not matching');</script>";
             }

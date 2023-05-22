@@ -28,22 +28,26 @@ else{
 												
 													if($_POST['submit'])
 													{
-						
-													$SQL="insert into users_orders(u_id,title,quantity,price) values('".$_SESSION["user_id"]."','".$item["title"]."','".$item["quantity"]."','".$item["price"]."')";
-						
-														mysqli_query($db,$SQL);
-														
-                                                        
-                                                        unset($_SESSION["cart_item"]);
-                                                        unset($item["title"]);
-                                                        unset($item["quantity"]);
-                                                        unset($item["price"]);
-														$success = "Thank you. Your order has been placed!";
+                                                        $session=$_SESSION["user_id"]; 
+                                                        $user= mysqli_query($db,"select balance from users where u_id='$session' ");
+                                                        $rows=mysqli_fetch_array($user); 
+                                                        if(($rows["balance"] - $item_total)>=0) {  
+                                                            $bal=$rows["balance"]-$item_total;
+                                                            $SQL= "UPDATE users SET balance=$bal WHERE u_id='".$_SESSION["user_id"]."'";
+                                                            mysqli_query($db,$SQL);
 
-                                                        function_alert();
-
-														
-														
+                                                            $SQL="insert into users_orders(u_id,title,quantity,price) values('".$_SESSION["user_id"]."','".$item["title"]."','".$item["quantity"]."','".$item["price"]."')";
+                                                            mysqli_query($db,$SQL);
+                                                            unset($_SESSION["cart_item"]);
+                                                            unset($item["title"]);
+                                                            unset($item["quantity"]);
+                                                            unset($item["price"]);
+                                                            $success = "Thank you. Your order has been placed!";
+                                                            function_alert();
+                                                        }
+                                                        else{
+                                                            echo "<script>alert('Insufficient Balance');</script>";
+                                                        }	
 													}
 												}
 ?>
@@ -160,12 +164,8 @@ else{
                                         <div class="cart-totals-title">
                                             <h4>Cart Summary</h4> </div>
                                         <div class="cart-totals-fields">
-										
                                             <table class="table">
 											<tbody>
-                                          
-												 
-											   
                                                     <tr>
                                                         <td>Cart Subtotal</td>
                                                         <td> <?php echo "Rs ".$item_total; ?></td>
@@ -175,13 +175,14 @@ else{
                                                         <td class="text-color"><strong> <?php echo "Rs ".$item_total; ?></strong></td>
                                                     </tr>
                                                 </tbody>
-												
-												
-												
-												
                                             </table>
                                         </div>
                                     </div>
+                                    <?php
+                                        $session=$_SESSION["user_id"]; 
+                                        $user= mysqli_query($db,"select balance from users where u_id='$session' ");
+                                        $rows=mysqli_fetch_array($user);
+                                    ?> 
                                     <div class="payment-option">
                                         <ul class=" list-unstyled">
                                         <div class="cart-totals-title">
@@ -189,10 +190,27 @@ else{
                                             <hr style="width:100%;text-align:left;margin-left:0">
                                             <li>
                                                 <label for="radioStacked1" class="custom-control custom-radio  m-b-20">
-                                                    <input name="mod" id="radioStacked1" checked value="COD" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Amrita E-Wallet</span>
+                                                    <input name="Amrita wallet" id="radioStacked1" checked value="Amrita wallet" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Amrita E-Wallet</span>
                                                 </label>
                                             </li>
-                                    
+                                            <div class="cart-totals-fields">
+                                            <table class="table">
+											<tbody>
+                                                    <tr>
+                                                        <td>Current Balance</td>
+                                                        <td> <?php echo "Rs ".$rows["balance"]; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-color">Bill amount</td>
+                                                        <td class="text-color"><?php echo "- Rs ".$item_total; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-color"><strong>After detection</strong></td>
+                                                        <td class="text-color"><strong> <?php echo "Rs ".($rows["balance"]-$item_total); ?></strong></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                             <!-- <li>
                                                 <label class="custom-control custom-radio  m-b-10">
                                                     <input name="mod"  type="radio" value="paypal" disabled class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
@@ -214,26 +232,7 @@ else{
                     <div class="row bottom-footer">
                         <div class="container">
                             <div class="row">
-                                <!-- <div class="col-xs-12 col-sm-3 payment-options color-gray">
-                                    <h5>Payment Options</h5>
-                                    <ul>
-                                        <li>
-                                            <a href="#"> <img src="images/paypal.png" alt="Paypal"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/mastercard.png" alt="Mastercard"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/maestro.png" alt="Maestro"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/stripe.png" alt="Stripe"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
-                                        </li>
-                                    </ul>
-                                </div> -->
+                                
                                       <a href="https://www.amrita.edu/" target="_blank"><img src="images/amrita.jpg" class="col-xs-12 col-sm-3 payment-options color-gray"></a>
 
                         <div class="col-xs-12 col-sm-4 address color-gray">
