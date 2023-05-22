@@ -35,7 +35,7 @@ if(isset($_POST['submit']))
 
 <head>
   <meta charset="UTF-8">
-  <title>Admin Login</title>
+  <title>Canteen Admin Login</title>
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -53,7 +53,7 @@ if(isset($_POST['submit']))
   
 <div class="container">
   <div class="info">
-    <h1>Admin Panel </h1>
+    <h1>Canteen Admin Panel </h1>
   </div>
 </div>
 <div class="form">

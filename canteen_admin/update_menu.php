@@ -100,10 +100,16 @@ if (isset($_POST['submit']))           //if upload btn is pressed
                         <span><img src="images/icn.png" alt="homepage" class="dark-logo" /></span>
                     </a>
                 </div>
+                <?php
+                        $session=$_SESSION["adm_id"]; 
+                        $user= mysqli_query($db,"select * FROM restaurant where restaurant.rs_id=(select rs_id from admin where adm_id='$session');");
+                        $rows=mysqli_fetch_array($user);
+;                        
+                    ?>
                 <div class="navbar-collapse">
 
                     <ul class="navbar-nav mr-auto mt-md-0">
-                    </ul>
+                    </ul><?php echo $rows["title"]; ?>
 
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">

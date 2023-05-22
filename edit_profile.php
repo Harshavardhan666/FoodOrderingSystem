@@ -289,7 +289,7 @@ session_start();
         </header>
     <?php
         $session=$_SESSION["user_id"]; 
-        $user= mysqli_query($db,"select * from users where u_id='$session' ");
+        $user= mysqli_query($db," select * from users where u_id='$session' ");
         $rows=mysqli_fetch_array($user);
  	?> 
     <div class="page-wrapper">

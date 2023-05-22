@@ -41,10 +41,16 @@ if (empty($_SESSION["adm_id"])) {
 
                         </a>
                     </div>
-
+                    <?php
+                        $session=$_SESSION["adm_id"]; 
+                        $user= mysqli_query($db,"select * FROM restaurant where restaurant.rs_id=(select rs_id from admin where adm_id='$session');");
+                        $rows=mysqli_fetch_array($user);
+;                        
+                    ?>
+                     
                     <div class="navbar-collapse">
                         <ul class="navbar-nav mr-auto mt-md-0">
-                        </ul>IT Canteen
+                        </ul><?php echo $rows["title"]; ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted" style="padding:0.5rem 0.5rem;" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
@@ -65,7 +71,7 @@ if (empty($_SESSION["adm_id"])) {
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
                             <li class="nav-devider"></li>
-                            <li class="nav-label">Home</li>
+                            <li class="nav-label">Home  </li>
                             <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
                             </li>
                             <li class="nav-label">Log</li>
