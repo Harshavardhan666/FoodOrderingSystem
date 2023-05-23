@@ -592,9 +592,7 @@ session_start();
             }
 
             function page1(){
-                window.close();
-                window.close();
-                // window.location.href = "edit_profile.php";
+                window.location.href = "edit_profile.php";
             }
 
 </script> 
