@@ -134,7 +134,7 @@
 include("connection/connect.php"); 
 error_reporting(0); 
 session_start(); 
-$count = 0;
+// $count = 0;
 if(isset($_POST['submit']))  
 {
 	$username = $_POST['username'];
@@ -157,11 +157,11 @@ if(isset($_POST['submit']))
                                         $count++;
                                       	$message = "Invalid Username or Password!"; 
 
-                                          if($count>=3)
-                                          {
-                                            header("refresh:0, url=edit.php"); 
-                                            exit();
-                                          }
+                                        //   if($count>=3)
+                                        //   {
+                                        //     header("refresh:0, url=edit.php"); 
+                                        //     exit();
+                                        //   }
                                 }
                                 
                                 
