@@ -14,8 +14,8 @@
 
     #buttn{
         color:#fff;
-        /* background-color: #5c4ac7; */
-        background-color: black;
+        background-color: #5c4ac7;
+        /* background-color: black; */
     }
 
 .popover { 
