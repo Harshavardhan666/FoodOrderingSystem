@@ -111,13 +111,22 @@ session_start();
 						$query_res= mysqli_query($db,"select * from dishes LIMIT 6"); 
                                 while($r=mysqli_fetch_array($query_res))
                                 {
+                                    $start_position = 0;
+                                    $length = 95; 
+                                    $suffix = "...";
+                                   
+                                    if (strlen($r['slogan']) > ($length - 3) ){
+                                        $print_stat= substr(strip_tags($r['slogan']), $start_position, $length) . $suffix ;
+                                    } else {
+                                        $print_stat= $r['slogan'];
+                                    } 
                                         
                                     echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
                                             <div class="food-item-wrap">
                                                 <div class="figure-wrap bg-image" data-image-src="admin/Res_img/dishes/'.$r['img'].'"></div>
                                                 <div class="content">
                                                     <h5><a href="dishes.php?res_id='.$r['rs_id'].'">'.$r['title'].'</a></h5>
-                                                    <div class="product-name">'.$r['slogan'].'</div>
+                                                    <div class="product-name">'.$print_stat.'</div>
                                                     <div class="price-btn-block"> <span class="price">Rs '.$r['price'].'</span> <a href="dishes.php?res_id='.$r['rs_id'].'" class="btn theme-btn-dash pull-right">Order Now</a> </div>
                                                 </div>
                                                 
