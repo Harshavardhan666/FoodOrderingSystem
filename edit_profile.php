@@ -607,13 +607,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']))
 	
 	if(!empty($_POST["submit"]))   
      {
-        $loginquery ="SELECT password FROM users WHERE u_id=8"; //selecting matching records
+        $session=$_SESSION["user_id"];       
+        $loginquery ="SELECT password FROM users WHERE u_id='$session' "; //selecting matching records
         $result=mysqli_query($db, $loginquery); //executing
         $row=mysqli_fetch_array($result);
         // password='".md5($password)."'
         if($row['password']==$old_pass){
             if($new_pass == $confirm_pass){
-                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id=8";
+                $mql = "UPDATE users SET password=('".md5($_POST['new_pass'])."') WHERE u_id='$session'";
                 mysqli_query($db, $mql);
                 // header("refresh:0.1;url=login.php");
                 // echo '<div class="modal-icon modal-success"><i class="fas fa-check-circle"></i></div>';
