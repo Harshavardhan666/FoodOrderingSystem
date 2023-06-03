@@ -59,6 +59,34 @@ include("connection/connect.php");
 
 // }
 
+        if (isset($_POST['submit'])) {
+          $username = $_POST['username'];
+          $email = $_POST['email'];
+          $phone = $_POST['phone'];
+          $newpassword = $_POST['newpassword'];
+          $confirmpassword = $_POST['confpass'];
+
+          if ($newpassword != $confirmpassword) {
+            echo '<script>showModal("Passwords Doesn\'t Match"); redirectToPage(1000)</script>'; 
+          } else {
+            // Passwords match, continue with further actions 
+
+            // Check if the provided information exists in the users table
+            $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone'";
+            $result = mysqli_query($db, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+              // Information exists in the database
+              // Perform further actions (e.g., send OTP, reset account, etc.)
+              // Add your code here
+              echo "Information Exists in the Database.";
+            } else {
+              // Information does not exist in the database
+              echo "Invalid Credentials!";
+            }
+          }
+        }
+
 ?>
 
 <head>
@@ -600,37 +628,7 @@ body {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     
-    <?php
-
-        if (isset($_POST['submit'])) {
-          $username = $_POST['username'];
-          $email = $_POST['email'];
-          $phone = $_POST['phone'];
-          $newpassword = $_POST['newpassword'];
-          $confirmpassword = $_POST['confpass'];
-
-          if ($newpassword != $confirmpassword) {
-            echo '<script>showModal("Passwords Doesn\'t Match"); redirectToPage(1000)</script>'; 
-          } else {
-            // Passwords match, continue with further actions
-
-            // Check if the provided information exists in the users table
-            $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone'";
-            $result = mysqli_query($db, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-              // Information exists in the database
-              // Perform further actions (e.g., send OTP, reset account, etc.)
-              // Add your code here
-              echo "Information Exists in the Database.";
-            } else {
-              // Information does not exist in the database
-              echo "Invalid Credentials!";
-            }
-          }
-        }
-
-    ?>
+    
 
 </body>
 
