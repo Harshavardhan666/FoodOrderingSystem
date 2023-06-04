@@ -292,22 +292,7 @@ if(isset($_POST['submit']))
                                         
                                         </div>
                                      
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Phone </label>
-                                                    <input type="text" name="phone" class="form-control" value="<?php echo $row['phone'];  ?>" placeholder="1-(555)-555-5555">
-                                                   </div>
-                                            </div>
-                         
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">website URL</label>
-                                                    <input type="text" name="url" class="form-control form-control-danger" value="<?php echo $row['url'];  ?>" placeholder="http://example.com">
-                                                    </div>
-                                            </div>
-                                       
-                                        </div>
+                                     
                                 
                                         <div class="row">
                                             <div class="col-md-6">

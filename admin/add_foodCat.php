@@ -8,7 +8,7 @@ session_start();
 
 if(isset($_POST['submit'] ))
 {
-    if(empty($_POST['c_name']))
+    if(empty($_POST['fc_name']))
 		{
 			$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -18,7 +18,7 @@ if(isset($_POST['submit'] ))
 	else
 	{
 		
-	$check_cat= mysqli_query($db, "SELECT c_name FROM res_category where c_name = '".$_POST['c_name']."' ");
+	$check_cat= mysqli_query($db, "SELECT fc_name FROM food_category where fc_name = '".$_POST['fc_name']."' ");
 
 	
 	
@@ -32,11 +32,11 @@ if(isset($_POST['submit'] ))
 	else{
        
 	
-	$mql = "INSERT INTO res_category(c_name) VALUES('".$_POST['c_name']."')";
+	$mql = "INSERT INTO food_category(fc_name) VALUES('".$_POST['fc_name']."')";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																New Canteen Category Added Successfully.</br></div>';
+																New Food Category Added Successfully.</br></div>';
 	
     }
 	}
@@ -51,7 +51,7 @@ if(isset($_POST['submit'] ))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">   
-    <title>Add Canteen Category</title>
+    <title>Add Food Category</title>
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -158,7 +158,7 @@ if(isset($_POST['submit'] ))
                             <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Canteen Category</h4>
+                                <h4 class="m-b-0 text-white">Add Food Category</h4>
                             </div>
                                 <form action='' method='post' >
                                     <div class="form-body">
@@ -167,8 +167,8 @@ if(isset($_POST['submit'] ))
                                         <div class="row p-t-20">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="control-label">Canteen Category Name</label>
-                                                    <input type="text" name="c_name" class="form-control" >
+                                                    <label class="control-label">Food Category Name</label>
+                                                    <input type="text" name="fc_name" class="form-control" >
                                                    </div>
                                             </div>
                                      
@@ -176,7 +176,7 @@ if(isset($_POST['submit'] ))
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" name="submit" class="btn btn-primary" value="Save"> 
-                                        <a href="add_category.php" class="btn btn-inverse">Cancel</a>
+                                        <a href="add_foodCat.php" class="btn btn-inverse">Cancel</a>
                                     </div>
                                 </form>
                             </div>
@@ -196,9 +196,7 @@ if(isset($_POST['submit'] ))
                                     <table id="myTable" class="table table-bordered table-hover table-striped">
                                         <thead class="thead-dark">
                                             <tr  style="text-align:center;">
-                                                <th>ID</th>
-                                                <th>Canteen Category Name</th>
-                                                <th>Date</th>
+                                                <th>Category Name</th>
                                                 <th  style="text-align:center;">Action</th>
 												 
                                             </tr>
@@ -207,7 +205,7 @@ if(isset($_POST['submit'] ))
                                            
 											
 											<?php
-												$sql="SELECT * FROM res_category order by c_id desc";
+												$sql="SELECT * FROM food_category order by fc_id desc";
 												$query=mysqli_query($db,$sql);
 												
 													if(!mysqli_num_rows($query) > 0 )
@@ -221,12 +219,11 @@ if(isset($_POST['submit'] ))
 																					
 																				
 																				
-																					echo ' <tr  style="text-align:center;"><td>'.$rows['c_id'].'</td>
-																								<td>'.$rows['c_name'].'</td>
-																								<td>'.$rows['date'].'</td>
+																					echo ' <tr  style="text-align:center;">
+																								<td>'.$rows['fc_name'].'</td>
 																								
-																									 <td  style="text-align:center;"> <a href="delete_category.php?cat_del='.$rows['c_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																									 <a href="update_category.php?cat_upd='.$rows['c_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
+																									 <td  style="text-align:center;"> <a href="delete_foodCat.php?cat_del='.$rows['fc_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+																									 <a href="update_foodCat.php?cat_upd='.$rows['fc_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
 																									</td></tr>';
 																					 
 																						

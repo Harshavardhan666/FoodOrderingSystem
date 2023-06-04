@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
 		  
 		
 		
-		if(empty($_POST['d_name'])||empty($_POST['about'])||$_POST['price']==''||$_POST['res_name']=='')
+		if(empty($_POST['d_name'])||empty($_POST['about'])||$_POST['price']==''||$_POST['res_name']==''||$_POST['food_cat']=='')
 		{	
 											$error = 	'<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -58,7 +58,7 @@ if(isset($_POST['submit']))
 												
 												
 				                                 
-												$sql = "INSERT INTO dishes(rs_id,title,slogan,price,img) VALUE('".$_POST['res_name']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."')";  // store the submited data ino the database :images
+												$sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id) VALUE('".$_POST['res_name']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."')";  // store the submited data ino the database :images
 												mysqli_query($db, $sql); 
 												move_uploaded_file($temp, $store);
 			  
@@ -252,7 +252,7 @@ if(isset($_POST['submit']))
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <label class="control-label">Description</label>
-                                                    <input type="text" name="about" class="form-control form-control-danger" >
+                                                    <input type="text" name="about" class="form-control form-control-danger" minlength="95" >
                                                     </div>
                                             </div>
                                      
@@ -277,13 +277,26 @@ if(isset($_POST['submit']))
 										
                                   
                                         <div class="row">
-                                            
-											
-											
-											
-											
-											
-											
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Select Food Category</label>
+													<select name="food_cat" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                                        <option>--Select Category--</option>
+                                                 <?php $ssql ="select * from food_category";
+													$res=mysqli_query($db, $ssql); 
+													while($row=mysqli_fetch_array($res))  
+													{
+                                                       echo' <option value="'.$row['fc_id'].'">'.$row['fc_name'].'</option>';;
+													}  
+                                                 
+													?> 
+													 </select>
+                                                </div>
+                                            </div>
+
+
+
+
 											 <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Select Canteen</label>
@@ -300,6 +313,8 @@ if(isset($_POST['submit']))
 													 </select>
                                                 </div>
                                             </div>
+
+                                            
 											
 											
 											
