@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 
 session_start(); 
 error_reporting(0); 
@@ -63,28 +69,59 @@ include("connection/connect.php");
           $username = $_POST['username'];
           $email = $_POST['email'];
           $phone = $_POST['phone'];
-          $newpassword = $_POST['newpassword'];
-          $confirmpassword = $_POST['confpass'];
+          // $newpassword = $_POST['newpassword'];
+          // $confirmpassword = $_POST['confpass'];
 
-          if ($newpassword != $confirmpassword) {
-            echo '<script>showModal("Passwords Doesn\'t Match"); redirectToPage(1000)</script>'; 
-          } else {
+          // if ($newpassword != $confirmpassword) {
+          //   echo '<script>showModal("Passwords Doesn\'t Match"); redirectToPage(1000)</script>'; 
+          // } else {
             // Passwords match, continue with further actions 
 
             // Check if the provided information exists in the users table
             $query = "SELECT * FROM users WHERE username='$username' AND email='$email' AND phone='$phone'";
             $result = mysqli_query($db, $query);
-
+            $rows = mysqli_fetch_array( $result);
             if (mysqli_num_rows($result) > 0) {
               // Information exists in the database
               // Perform further actions (e.g., send OTP, reset account, etc.)
               // Add your code here
-              echo "Information Exists in the Database.";
+              $mail = new PHPMailer(true);
+
+              $link = "<a href='http://localhost/FoodOrderingSystem/reset_pass.php?id=$rows[u_id]'>Reset Password Link</a>";
+
+              $mail->isSMTP();
+              $mail->Host = 'smtp.gmail.com';
+              $mail->SMTPAuth = true;
+              $mail->Username = 'canteenavvp@gmail.com'; // Your geatt
+              // $mail->Password = 'jmrknaiiwtjlcfiq';
+              $mail->Password = 'jogqrsiyblybugel';
+              $mail->SMTPSecure = 'ssl';
+              $mail->Port = 465;
+
+              $mail->setFrom('canteenavvp@gmail.com'); // Your gmail
+
+              $mail->addAddress($_POST["email"]);
+
+              $mail->isHTML(true);
+
+              $mail->Subject = "Reset Password Link";
+              $mail->Body = "<h1>Dear " .$username . "\nTap the click below to reset your user account password. If you didn't request a new password, you can safely delete this email. \n".$link."</h1>";
+              // $mail->Body = "Tap the click below to reset your user account password. If you didn't request a new password, you can safely delete this email" ;
+
+              $mail->send();
+
+              echo
+              "
+                  <script>
+                  alert('Sent Successfully');
+                  document.location.href = 'edit.php';
+                  </script>
+                  ";
+
             } else {
               // Information does not exist in the database
-              echo "Invalid Credentials!";
+              echo "Account Doesn't Exist!";
             }
-          }
         }
 
 ?>
@@ -379,20 +416,26 @@ body {
                         <div class="widget" >
                            <div class="widget-body">
                             
-							  <form action="edit.php" method="post" onsubmit="return toggle()" >
+							  <form action="" method="post" onsubmit="return toggle()" >
                 <h2 style="text-align: center; color: #8050C7; font-family: Arial, sans-serif; font-size: 30px">Reset Your Account</h2>
                 <div id="form">
                               <div class="row">
-								                    <div class="form-group col-sm-7">
+								                    <div class="form-group col-sm-4">
                                        <label for="username">User-Name</label>
                                        <input class="form-control" type="text" name="username" id="username" required> 
                                     </div>
-                           
-                                    <div class="form-group col-sm-6">
+                                    </div>
+                                 
+                                    <div class="row">
+                                    <div class="form-group col-sm-4">
                                        <label for="email">Email Address</label>
                                        <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" required> 
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="form-group col-sm-4">
                                        <label for="mobile">Phone number</label>
                                        <input class="form-control" type="text" name="phone" id="mobile" required> 
                                     </div>
@@ -400,7 +443,7 @@ body {
                                        <label for="exampleInputPassword1">Password</label>
                                        <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
                                     </div> -->
-                                    <div class="form-group col-sm-6">
+                                    <!-- <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword1">New Password</label>
                                        <input type="password" class="form-control" name="newpassword" id="exampleInputPassword1" onkeyup="checkPasswordStrength(this.value)" required> 
                                        <div id="password-strength"></div>
@@ -408,17 +451,16 @@ body {
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword2">Confirm Password</label>
                                        <input type="password" class="form-control" name="confpass" id="exampleInputPassword2" required>
-                                    </div>
+                                    </div> -->
                                    
                             </div>
                                 
                                  <div class="row">
                                     <div class="col-sm-3">
-                                       <input type="submit" class="btn btn-primary" name="submit" value="Send OTP">
+                                       <input type="submit" class="btn btn-primary" name="submit" value="Reset">
                                     </div>
-
                                     <div class="col-sm-3">
-                                      <button type="button" name="cancel" class="btn btn-primary" onclick="redirect()" id="canbtn">Cancel</button>
+                                      <button type="button" name="cancel" class="btn btn-primary" onclick="redirect()" id="canbtn">Back to Login</button>
                                     </div>
                                  </div>
 
