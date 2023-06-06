@@ -10,13 +10,16 @@ session_start();
 
 if (isset($_POST['submit'])) {
 
+    $session=$_SESSION["adm_id"]; 
+    $sql = "SELECT rs_id from admin where adm_id=$session";
+    $result = mysqli_query($db, $sql);
+    $haha=mysqli_fetch_array($result);
 
 
 
 
 
-
-    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == '') {
+    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == ''||$_POST['food_cat']=='') {
         $error =     '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>All fields Must be Fillup!</strong>
@@ -45,7 +48,7 @@ if (isset($_POST['submit'])) {
 
 
 
-                $sql = "INSERT INTO dishes(rs_id,title,slogan,price,img) VALUE('" . $_POST['res_name'] . "','" . $_POST['d_name'] . "','" . $_POST['about'] . "','" . $_POST['price'] . "','" . $fnew . "')";  // store the submited data ino the database :images
+                $sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id) VALUE('".$haha['rs_id']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."')"; 
                 mysqli_query($db, $sql);
                 move_uploaded_file($temp, $store);
 
@@ -238,35 +241,30 @@ if (isset($_POST['submit'])) {
                                         </div>
                                     </div>
 
-
-
                                     <div class="row">
-
-
-
-
-
-
-                                        <br>
-                                        <!-- <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Select Restaurant</label>
-                                                <select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                                    <option>--Select Restaurant--</option>
-                                                    <?php $ssql = "select * from restaurant";
-                                                    $res = mysqli_query($db, $ssql);
-                                                    while ($row = mysqli_fetch_array($res)) {
-                                                        echo ' <option value="' . $row['rs_id'] . '">' . $row['title'] . '</option>';;
-                                                    }
-
-                                                    ?>
-                                                </select>
+                                        
+                                        <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Select Food Category</label>
+													<select name="food_cat" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                                        <option>--Select Category--</option>
+                                                 <?php $ssql ="select * from food_category";
+													$res=mysqli_query($db, $ssql); 
+													while($row=mysqli_fetch_array($res))  
+													{
+                                                       echo' <option value="'.$row['fc_id'].'">'.$row['fc_name'].'</option>';;
+													}  
+                                                 
+													?> 
+													 </select>
+                                                </div>
                                             </div>
-                                        </div> -->
 
-
-
-                                    </div>
+                                            
+											
+											
+											
+                                        </div>
 
                                 </div>
                         </div>

@@ -164,11 +164,13 @@ if (empty($_SESSION["adm_id"])) {
                                                 <span><i class="fa fa-th-large f-s-40" aria-hidden="true"></i></span>
                                             </div>
                                             <div class="media-body media-text-right">
-                                                <h2><?php $sql = "select * from res_category";
-                                                    $result = mysqli_query($db, $sql);
-                                                    $rws = mysqli_num_rows($result);
+                                                <h2><?php 
+                                                $session=$_SESSION["adm_id"]; 
+                                                $sql = "SELECT COUNT(DISTINCT fc_id) AS category_count FROM dishes JOIN restaurant ON dishes.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session');";
+                                                $result = mysqli_query($db, $sql);
+                                                $rows=mysqli_fetch_array($result);
 
-                                                    echo $rws; ?></h2>
+                                                    echo $rows["category_count"]; ?></h2>
                                                 <p class="m-b-0">Food Categories</p>
                                             </div>
                                         </div>
@@ -182,11 +184,14 @@ if (empty($_SESSION["adm_id"])) {
                                                 <span><i class="fa fa-cutlery f-s-40" aria-hidden="true"></i></span>
                                             </div>
                                             <div class="media-body media-text-right">
-                                                <h2><?php $sql = "select * from dishes";
-                                                    $result = mysqli_query($db, $sql);
-                                                    $rws = mysqli_num_rows($result);
-
-                                                    echo $rws; ?></h2>
+                                                <h2><?php 
+                                                $session=$_SESSION["adm_id"]; 
+                                                $sql = "SELECT COUNT(*) AS dish_count FROM dishes JOIN restaurant ON dishes.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session');";
+                                                $result = mysqli_query($db, $sql);
+                                                $rows=mysqli_fetch_array($result);
+                                                
+                                                    echo $rows["dish_count"];
+                                                ?></h2>
                                                 <p class="m-b-0">Dishes</p>
                                             </div>
                                         </div>
@@ -201,10 +206,17 @@ if (empty($_SESSION["adm_id"])) {
                                             </div>
                                             <div class="media-body media-text-right">
                                                 <h2><?php
-                                                    $result = mysqli_query($db, 'SELECT SUM(price) AS value_sum FROM users_orders WHERE status = "closed"');
-                                                    $row = mysqli_fetch_assoc($result);
-                                                    $sum = $row['value_sum'];
-                                                    echo $sum;
+                                                    $session=$_SESSION["adm_id"]; 
+                                                    $sql = "SELECT SUM(quantity * price) AS total_earnings FROM users_orders JOIN restaurant ON users_orders.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session') AND users_orders.status = 'closed';";
+                                                    $result = mysqli_query($db, $sql);
+                                                    $rows=mysqli_fetch_array($result);
+                                                    
+                                                    if ( $rows["total_earnings"]>0){
+                                                        echo $rows["total_earnings"];
+                                                    }else{
+                                                        echo "0";
+                                                    }    
+                                                    
                                                     ?></h2>
                                                 <p class="m-b-0">Total Earnings</p>
                                             </div>
@@ -222,11 +234,18 @@ if (empty($_SESSION["adm_id"])) {
                                                 <span><i class="fa fa-shopping-cart f-s-40" aria-hidden="true"></i></span>
                                             </div>
                                             <div class="media-body media-text-right">
-                                                <h2><?php $sql = "select * from users_orders";
-                                                    $result = mysqli_query($db, $sql);
-                                                    $rws = mysqli_num_rows($result);
-
-                                                    echo $rws; ?></h2>
+                                                <h2><?php
+                                                $session=$_SESSION["adm_id"]; 
+                                                $sql = "SELECT COUNT(*) AS total_orders FROM users_orders JOIN restaurant ON users_orders.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session');";
+                                                $result = mysqli_query($db, $sql);
+                                                $rows=mysqli_fetch_array($result);
+                                                
+                                                if ( $rows["total_earnings"]>0){
+                                                    echo $rows["total_earnings"];
+                                                }else{
+                                                    echo "0";
+                                                }   
+                                                ?></h2>
                                                 <p class="m-b-0">Total Orders</p>
                                             </div>
                                         </div>
@@ -239,11 +258,14 @@ if (empty($_SESSION["adm_id"])) {
                                                 <span><i class="fa fa-spinner f-s-40" aria-hidden="true"></i></span>
                                             </div>
                                             <div class="media-body media-text-right">
-                                                <h2><?php $sql = "select * from users_orders WHERE status = 'in process' ";
-                                                    $result = mysqli_query($db, $sql);
-                                                    $rws = mysqli_num_rows($result);
-
-                                                    echo $rws; ?></h2>
+                                                <h2><?php
+                                                 $session=$_SESSION["adm_id"]; 
+                                                 $sql = "SELECT COUNT(*) AS total_orders_processing FROM users_orders JOIN restaurant ON users_orders.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session') AND users_orders.status NOT IN ('closed', 'rejected');";
+                                                 $result = mysqli_query($db, $sql);
+                                                 $rows=mysqli_fetch_array($result);
+                                                 
+                                                     echo $rows["total_orders_processing"]; 
+                                                    ?></h2>
                                                 <p class="m-b-0">Processing Orders</p>
                                             </div>
                                         </div>
@@ -257,11 +279,14 @@ if (empty($_SESSION["adm_id"])) {
                                                 <span><i class="fa fa-check f-s-40" aria-hidden="true"></i></span>
                                             </div>
                                             <div class="media-body media-text-right">
-                                                <h2><?php $sql = "select * from users_orders WHERE status = 'closed' ";
-                                                    $result = mysqli_query($db, $sql);
-                                                    $rws = mysqli_num_rows($result);
-
-                                                    echo $rws; ?></h2>
+                                                <h2><?php 
+                                                $session=$_SESSION["adm_id"]; 
+                                                $sql = "SELECT COUNT(*) AS total_orders_delivered FROM users_orders JOIN restaurant ON users_orders.rs_id = restaurant.rs_id WHERE restaurant.rs_id = (select rs_id from admin where adm_id='$session') AND users_orders.status = 'closed';";
+                                                $result = mysqli_query($db, $sql);
+                                                $rows=mysqli_fetch_array($result);
+                                                
+                                                    echo $rows["total_orders_delivered"]; 
+                                                    ?></h2>
                                                 <p class="m-b-0">Delivered Orders</p>
                                             </div>
                                         </div>

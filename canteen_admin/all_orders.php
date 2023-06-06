@@ -143,7 +143,13 @@ session_start();
 
 
                                             <?php
-                                            $sql = "SELECT users.*, users_orders.* FROM users INNER JOIN users_orders ON users.u_id=users_orders.u_id ";
+                                            $session=$_SESSION["adm_id"];
+
+                                            $sql = "SELECT u.username AS User, o.title AS 'Item Name', o.quantity AS Quantity, o.price AS Price, o.status AS Status, o.date AS 'Reg-Date'
+                                            FROM users u
+                                            JOIN users_orders o ON u.u_id = o.u_id
+                                            JOIN restaurant r ON o.rs_id = r.rs_id
+                                            WHERE r.rs_id = (select rs_id from admin where adm_id='$session');";
                                             $query = mysqli_query($db, $sql);
 
                                             if (!mysqli_num_rows($query) > 0) {
@@ -154,10 +160,10 @@ session_start();
                                             ?>
                                                     <?php
                                                     echo ' <tr>
-																					           <td>' . $rows['username'] . '</td>
-																								<td>' . $rows['title'] . '</td>
-																								<td>' . $rows['quantity'] . '</td>
-																								<td>Rs ' . $rows['price'] . '</td>';
+																					           <td>' . $rows['User'] . '</td>
+																								<td>' . $rows['Item Name'] . '</td>
+																								<td>' . $rows['Quantity'] . '</td>
+																								<td>Rs ' . $rows['Price'] . '</td>';
                                                     ?>
                                                     <?php
                                                     $status = $rows['status'];
