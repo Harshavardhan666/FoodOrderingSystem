@@ -25,6 +25,33 @@ include_once 'product-action.php';
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/input-spinner/dist/input-spinner.min.css">
     <script src="https://cdn.jsdelivr.net/npm/input-spinner/dist/input-spinner.min.js"></script>
+    <style>
+        .collapsible {
+            background-color: #FAFAF8;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            color: #25282B;
+        }
+
+        /* .collapsible .row {
+    background-color: #777;
+} */
+        .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            /* display: none; */
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body>
@@ -138,7 +165,7 @@ include_once 'product-action.php';
 
                                         <a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=decrement&id=<?php echo $item["d_id"]; ?>">
                                             <i class="fa fa-minus pull-right"></i></a>
-                                        
+
                                     </div>
 
                                 <?php
@@ -180,76 +207,113 @@ include_once 'product-action.php';
                 </div>
 
                 <div class="col-md-8">
+                    <h1>Menu</h1>
 
-
-                    <div class="menu-widget" id="2">
-                        <div class="widget-heading">
-                            <h3 class="widget-title text-dark">
-                                MENU <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular2" aria-expanded="true">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                    <i class="fa fa-angle-down pull-right"></i>
-                                </a>
-                            </h3>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="collapse in" id="popular2">
-                            <?php
-                            $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]'");
-                            $stmt->execute();
-                            $products = $stmt->get_result();
-                            if (!empty($products)) {
-                                foreach ($products as $product) {
+                    <?php
+                    $qur = $db->prepare("select * from food_category");
+                    $qur->execute();
+                    $categorys = $qur->get_result();
+                    if ($categorys->num_rows > 0) {
+                        foreach ($categorys as $category) {
 
 
 
-                            ?>
-                                    <div class="food-item">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                                <form method="post" action='dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
-                                                    <div class="rest-logo pull-left">
-                                                        <a class="restaurant-logo pull-left" href="#"><?php echo '<img src="admin/Res_img/dishes/' . $product['img'] . '" alt="Food logo">'; ?></a>
+                    ?>
+                            <button type="button" class="collapsible"><?php echo $category['fc_name']; ?></button>
+
+                            <div class="content">
+                                <div class="collapse in" id="popular2">
+                                    <?php
+                                    $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]' and fc_id='$category[fc_id]'");
+                                    $stmt->execute();
+                                    $products = $stmt->get_result();
+                                    // echo $products;
+                                    if ($products->num_rows > 0) {
+                                        foreach ($products as $product) {
+
+                                        ?>  <div class="menu-widget">
+                                                <div class="food-item">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-lg-8">
+                                                            <form method="post" action='dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
+                                                                <div class="rest-logo pull-left">
+                                                                    <a class="restaurant-logo pull-left" href="#"><?php echo '<img src="admin/Res_img/dishes/' . $product['img'] . '" alt="Food logo" >'; ?></a>
+                                                                </div>
+
+                                                                <div class="rest-descr">
+                                                                    <h6><a href="#"><?php echo $product['title']; ?></a></h6>
+                                                                    <p> <?php echo $product['slogan']; ?></p>
+                                                                </div>
+
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12 col-lg-3  item-cart-info">
+                                                            <span class="price ">Rs <?php echo $product['price']; ?></span>
+                                                            <input class="b-r-0" type="number" name="quantity" style="margin-left:20px;width:40%; padding: 2px 0 2px 4px ;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;" value="0" size="1" min="0" />
+
+                                                            <input type="submit" class="btn theme-btn" style="margin-left:40px;margin-top:10px;" value="Add To Cart" />
+                                                        </div>
+
+
+
+                                                        </form>
                                                     </div>
 
-                                                    <div class="rest-descr">
-                                                        <h6><a href="#"><?php echo $product['title']; ?></a></h6>
-                                                        <p> <?php echo $product['slogan']; ?></p>
-                                                    </div>
-
+                                                </div>
                                             </div>
 
-                                            <div class="col-xs-12 col-sm-12 col-lg-3 pull-right item-cart-info">
-                                                <span class="price pull-left">Rs <?php echo $product['price']; ?></span>
-                                                <input class="b-r-0" type="number" name="quantity" style="margin-left:20px;width:40%; padding: 2px 0 2px 4px ;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;" value="0" size="1" min="0" />
-
-                                                <input type="submit" class="btn theme-btn" style="margin-left:40px;margin-top:10px;" value="Add To Cart" />
-                                            </div>
-
-
-
-                                            </form>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <div style="margin:5px">
+                                                        <h6>Currently Items are not available in this Category</h6>
                                         </div>
+                                    <?php
+                                    }
 
-                                    </div>
-                            <?php
-                                }
-                            }
-
-                            ?>
+                                    ?>
 
 
 
+                                </div>
+
+                            </div>
+
+                            <br>
+
+                    <?php
+                        }
+                    } else {
+                        ?>
+                        <div style="margin:5px">
+                                <h6>NO Categories</h6>
                         </div>
+                    <?php
+                    }
 
-                    </div>
-
+                    ?>
 
                 </div>
-
             </div>
 
         </div>
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
 
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+        </script>
         <footer class="footer">
             <div class="container">
 
