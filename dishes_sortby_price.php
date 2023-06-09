@@ -102,7 +102,6 @@ include_once 'product-action.php';
             background-color: #669999;
         }
     </style>
-
 </head>
 
 <body>
@@ -139,7 +138,7 @@ include_once 'product-action.php';
                 <ul class="row links">
 
                     <li class="col-xs-12 col-sm-4 link-item"><span>1</span><a href="restaurants.php">Choose Canteen</a></li>
-                    <li class="col-xs-12 col-sm-4 link-item active"><span>2</span><a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>">Pick Your favorite food</a></li>
+                    <li class="col-xs-12 col-sm-4 link-item active"><span>2</span><a href="dishes_sortby_price.php?res_id=<?php echo $_GET['res_id']; ?>">Pick Your favorite food</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="#">Order and Pay</a></li>
 
                 </ul>
@@ -201,7 +200,7 @@ include_once 'product-action.php';
                                 ?>
 
                                     <div class="title-row">
-                                        <?php echo $item["title"]; ?><a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=remove&id=<?php echo $item["d_id"]; ?>">
+                                        <?php echo $item["title"]; ?><a href="dishes_sortby_price.php?res_id=<?php echo $_GET['res_id']; ?>&action=remove&id=<?php echo $item["d_id"]; ?>">
                                             <i class="fa fa-trash pull-right"></i></a>
 
                                     </div>
@@ -214,7 +213,7 @@ include_once 'product-action.php';
                                             <input class="form-control" type="text" readonly value='<?php echo $item["quantity"]; ?>' id="example-number-input">
                                         </div>
 
-                                        <a href="dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=decrement&id=<?php echo $item["d_id"]; ?>">
+                                        <a href="dishes_sortby_price.php?res_id=<?php echo $_GET['res_id']; ?>&action=decrement&id=<?php echo $item["d_id"]; ?>">
                                             <i class="fa fa-minus pull-right"></i></a>
 
                                     </div>
@@ -258,20 +257,17 @@ include_once 'product-action.php';
                 </div>
 
                 <div class="col-md-8">
-
-                    <div>
+                    <div class="row">
                         <h1>Menu</h1>
-
                         <div class="dropdown-menu">
-                            <button class="menu-btn">Sort by < </button>
+                            <button class="menu-btn">Sort by <</button>
                                     <div class="menu-content">
-                                        <?php echo '<a class="links-hidden" href="dishes_sortby_price.php?res_id=' . $rows['rs_id'] . '">Price</a>'; ?>
+                                        <?php echo '<a class="links-hidden" href="dishes.php?res_id=' . $rows['rs_id'] . '">Dish Name</a>'; ?>
                                         <!-- <a class="links-hidden" href="#">Visit Us</a>
-                                    <a class="links-hidden" href="#">About Us</a> -->
+                    <a class="links-hidden" href="#">About Us</a> -->
                                     </div>
                         </div>
                     </div>
-
 
 
 
@@ -290,7 +286,7 @@ include_once 'product-action.php';
                             <div class="content">
                                 <div class="collapse in" id="popular2">
                                     <?php
-                                    $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]' and fc_id='$category[fc_id]' ORDER BY title");
+                                    $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]' and fc_id='$category[fc_id]' ORDER BY price");
                                     $stmt->execute();
                                     $products = $stmt->get_result();
                                     // echo $products;
@@ -301,7 +297,7 @@ include_once 'product-action.php';
                                                 <div class="food-item">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12 col-lg-8">
-                                                            <form method="post" action='dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
+                                                            <form method="post" action='dishes_sortby_price.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
                                                                 <div class="rest-logo pull-left">
                                                                     <a class="restaurant-logo pull-left" href="#"><?php echo '<img src="admin/Res_img/dishes/' . $product['img'] . '" alt="Food logo" >'; ?></a>
                                                                 </div>
