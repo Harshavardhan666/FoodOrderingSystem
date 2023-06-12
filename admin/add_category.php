@@ -94,173 +94,45 @@ if(isset($_POST['submit'] ))
                 </div>
             </nav>
         </div>
-     
         <div class="left-sidebar">
     
-            <div class="scroll-sidebar">
-           
-                <nav class="sidebar-nav">
-                   <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Home</li>
-                        <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
-                        <li class="nav-label">Log</li>
-                        <li> <a href="all_users.php">  <span><i class="fa fa-user f-s-20 "></i></span><span>Users</span></a></li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Canteen</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_restaurant.php">All Canteens</a></li>
-								<li><a href="add_category.php">Add Canteen Category</a></li>
-                                <li><a href="add_restaurant.php">Add Canteen</a></li>
-                                
-                            </ul>
-                        </li>
-                     <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_menu.php">All Menues</a></li>
-                                <li><a href="add_foodCat.php">Add food Category</a></li>
-								<li><a href="add_menu.php">Add Menu</a></li>
-                              
-                                
-                            </ul>
-                        </li>
-						 <li> <a href="all_orders.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span></a></li>
-                         
-                    </ul>
-                </nav>
-        
-            </div>
-         
-        </div>
-
-        <div class="page-wrapper">
-
-            <div class="container-fluid">
-     
-                     
-					
-					
-					  <div class="row">
-                   
-                   
-					
-					 <div class="container-fluid">
-         
-                  
-									
-									<?php  
-									        echo $error;
-									        echo $success; ?>
-									
-									
-								
-						
-                         
-                            <div class="col-lg-12">
-                        <div class="card card-outline-primary">
-                            <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Canteen Category</h4>
-                            </div>
-                                <form action='' method='post' >
-                                    <div class="form-body">
-                                       
-                                        <hr>
-                                        <div class="row p-t-20">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">Canteen Category Name</label>
-                                                    <input type="text" name="c_name" class="form-control" >
-                                                   </div>
-                                            </div>
-                                     
-                                            
-                                    </div>
-                                    <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-primary" value="Save"> 
-                                        <a href="add_category.php" class="btn btn-inverse">Cancel</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-					
-                </div>
-					
-					   <div class="col-12">
-                        
-                       
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Listed Categories</h4>
-                             
-                                <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-hover table-striped">
-                                        <thead class="thead-dark">
-                                            <tr  style="text-align:center;">
-                                                <th>ID</th>
-                                                <th>Canteen Category Name</th>
-                                                <th>Date</th>
-                                                <th  style="text-align:center;">Action</th>
-												 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-											
-											<?php
-												$sql="SELECT * FROM res_category order by c_id desc";
-												$query=mysqli_query($db,$sql);
-												
-													if(!mysqli_num_rows($query) > 0 )
-														{
-															echo '<td colspan="7"><center>No Categories-Data!</center></td>';
-														}
-													else
-														{				
-																	while($rows=mysqli_fetch_array($query))
-																		{
-																					
-																				
-																				
-																					echo ' <tr  style="text-align:center;"><td>'.$rows['c_id'].'</td>
-																								<td>'.$rows['c_name'].'</td>
-																								<td>'.$rows['date'].'</td>
-																								
-																									 <td  style="text-align:center;"> <a href="delete_category.php?cat_del='.$rows['c_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																									 <a href="update_category.php?cat_upd='.$rows['c_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
-																									</td></tr>';
-																					 
-																						
-																						
-																		}	
-														}
-												
-											
-											?>
-                                             
-                                            
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-						 </div>
-					
-					
-					
-					
-					
-					
-					
-                </div>
-               
-            </div>
-       
-            <footer class="footer"> © 2023 - Online Food Ordering System </footer>
-      
-        </div>
+    <div class="scroll-sidebar">
    
+        <nav class="sidebar-nav">
+           <ul id="sidebarnav">
+                <li class="nav-devider"></li>
+                <li class="nav-label">Home</li>
+                <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+                <li class="nav-label">Log</li>
+                <li> <a href="all_users.php">  <span><i class="fa fa-user f-s-20 "></i></span><span>Users</span></a></li>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Canteen</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="all_restaurant.php">All Canteens</a></li>
+                        <li><a href="add_category.php">Add Canteen Category</a></li>
+                        <li><a href="add_restaurant.php">Add Canteen</a></li>
+                        
+                    </ul>
+                </li>
+             <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="all_menu.php">All Menues</a></li>
+                        <li><a href="add_foodCat.php">Add food Category</a></li>
+                        <li><a href="add_menu.php">Add Menu</a></li>
+                      
+                        
+                    </ul>
+                </li>
+                 <li> <a href="all_orders.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span></a></li>
+                 <li> <a href="reports.php"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Reports</span></a></li>
+                 
+                 <li> <a href="item_reports.php"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Items report</span></a></li>
+
+            </ul>
+        </nav>
+
     </div>
+ 
+</div>
    
     <script src="js/lib/jquery/jquery.min.js"></script>
     <script src="js/lib/bootstrap/js/popper.min.js"></script>
