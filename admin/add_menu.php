@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
 		  
 		
 		
-		if(empty($_POST['d_name'])||empty($_POST['about'])||$_POST['price']==''||$_POST['res_name']==''||$_POST['food_cat']=='')
+		if(empty($_POST['d_name'])||empty($_POST['about'])||$_POST['price']==''||$_POST['res_name']==''||$_POST['food_cat']==''||$_POST['calories']=='')
 		{	
 											$error = 	'<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -58,7 +58,7 @@ if(isset($_POST['submit']))
 												
 												
 				                                 
-												$sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id) VALUE('".$_POST['res_name']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."')"; 
+												$sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id,calories) VALUE('".$_POST['res_name']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."','".$_POST['calories']."')"; 
 												mysqli_query($db, $sql); 
 												move_uploaded_file($temp, $store);
 			  
@@ -180,11 +180,11 @@ if(isset($_POST['submit']))
         </div>
      
         <div class="left-sidebar">
-     
+    
             <div class="scroll-sidebar">
-               
+           
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
+                   <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li> <a href="dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
@@ -193,14 +193,15 @@ if(isset($_POST['submit']))
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Canteen</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="all_restaurant.php">All Canteens</a></li>
-								<li><a href="add_category.php">Add Category</a></li>
+								<li><a href="add_category.php">Add Canteen Category</a></li>
                                 <li><a href="add_restaurant.php">Add Canteen</a></li>
                                 
                             </ul>
                         </li>
-                      <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
+                     <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="all_menu.php">All Menues</a></li>
+                                <li><a href="add_foodCat.php">Add food Category</a></li>
 								<li><a href="add_menu.php">Add Menu</a></li>
                               
                                 
@@ -210,9 +211,9 @@ if(isset($_POST['submit']))
                          
                     </ul>
                 </nav>
-            
-            </div>
         
+            </div>
+         
         </div>
       
         <div class="page-wrapper">
@@ -271,6 +272,13 @@ if(isset($_POST['submit']))
                                                     <label class="control-label">Image</label>
                                                     <input type="file" name="file"  id="lastName" class="form-control form-control-danger" placeholder="12n">
                                                     </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Calories </label>
+                                                    <input type="text" name="calories" class="form-control" placeholder="Kcal">
+                                                   </div>
                                             </div>
                                         </div>
                               
