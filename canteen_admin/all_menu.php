@@ -159,6 +159,7 @@ session_start();
                     echo "<th>Item</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Calories</th>
                     <th>Image</th>
                    <th>Action</th>";
 
@@ -172,6 +173,7 @@ session_start();
                                 <td>' . $dishTitle . '</td>
                                 <td>' . $dish['slogan'] . '</td>
                                 <td>Rs ' . $dishPrice . '</td>
+                                <td>' . $dish['calories'] ." kcal". '</td>
                                 
                                 
                                 <td><div class="col-md-3 col-lg-8 m-b-10">

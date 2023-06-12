@@ -89,10 +89,10 @@ include_once 'product-action.php';
         }
 
         .links-hidden:hover,
-        .links:hover {
+        /* .links:hover {
             background-color: black;
             color: white;
-        }
+        } */
 
         .dropdown-menu:hover .menu-content {
             display: block;
@@ -195,8 +195,11 @@ include_once 'product-action.php';
                                 <?php
 
                                 $item_total = 0;
+                                $total_cal=0;
 
                                 foreach ($_SESSION["cart_item"] as $item) {
+                                    $user= mysqli_query($db," select * from dishes where title='$item[title]' ");
+                                    $rows=mysqli_fetch_array($user);
                                 ?>
 
                                     <div class="title-row">
@@ -220,6 +223,8 @@ include_once 'product-action.php';
 
                                 <?php
                                     $item_total += ($item["price"] * $item["quantity"]);
+                                    $total_cal += ($rows["calories"] * $item["quantity"]);
+
                                 }
                                 ?>
 
@@ -230,7 +235,10 @@ include_once 'product-action.php';
 
                         <div class="widget-body">
                             <div class="price-wrap text-xs-center">
-                                <p>TOTAL</p>
+                                <p style="margin-bottom: 0px;">TOTAL CALORIES</p>
+                                <h3 class="value"><strong><?php echo $total_cal." kcal"; ?></strong></h3>
+                                <br>
+                                <p style="margin-bottom: 0px;">TOTAL BIll</p>
                                 <h3 class="value"><strong><?php echo "Rs " . $item_total; ?></strong></h3>
                                 <?php
                                 if ($item_total == 0) {
@@ -264,7 +272,7 @@ include_once 'product-action.php';
                                     <div class="menu-content">
                                         <?php echo '<a class="links-hidden" href="dishes.php?res_id=' . $rows['rs_id'] . '">Dish Name</a>'; ?>
                                         <!-- <a class="links-hidden" href="#">Visit Us</a>
-                    <a class="links-hidden" href="#">About Us</a> -->
+                                        <a class="links-hidden" href="#">About Us</a> -->
                                     </div>
                         </div>
                     </div>
@@ -303,7 +311,7 @@ include_once 'product-action.php';
                                                                 </div>
 
                                                                 <div class="rest-descr">
-                                                                    <h6><a href="#"><?php echo $product['title']; ?></a></h6>
+                                                                    <h6><a href="#"><?php echo $product['title']; ?> </a> (<span><?php echo $product['calories']; ?>Kcal)</span></h6>
                                                                     <p> <?php echo $product['slogan']; ?></p>
                                                                 </div>
 

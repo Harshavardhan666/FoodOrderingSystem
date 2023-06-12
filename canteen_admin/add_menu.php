@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == ''||$_POST['food_cat']=='') {
+    if (empty($_POST['d_name']) || empty($_POST['about']) || $_POST['price'] == ''||$_POST['food_cat']=='' || $_POST['calories'] == '') {
         $error =     '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>All fields Must be Fillup!</strong>
@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
         $fnew = uniqid() . '.' . $extension;
 
         $store = "Res_img/dishes/" . basename($fnew);
+        $store1 = "admin/Res_img/dishes/" . basename($fnew);
 
         if ($extension == 'jpg' || $extension == 'png' || $extension == 'gif') {
             if ($fsize >= 1000000) {
@@ -48,9 +49,10 @@ if (isset($_POST['submit'])) {
 
 
 
-                $sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id) VALUE('".$haha['rs_id']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."')"; 
+                $sql = "INSERT INTO dishes(rs_id,title,slogan,price,img,fc_id,calories) VALUE('".$haha['rs_id']."','".$_POST['d_name']."','".$_POST['about']."','".$_POST['price']."','".$fnew."','".$_POST['food_cat']."','".$_POST['calories']."')"; 
                 mysqli_query($db, $sql);
                 move_uploaded_file($temp, $store);
+                move_uploaded_file($temp, $store1);
 
                 $success =     '<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -259,7 +261,13 @@ if (isset($_POST['submit'])) {
 													 </select>
                                                 </div>
                                             </div>
-
+                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Calories </label>
+                                                    <input type="number" name="calories" class="form-control" placeholder="Kcal">
+                                                </div>
+                                            </div>
                                             
 											
 											
