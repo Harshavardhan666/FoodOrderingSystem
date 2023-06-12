@@ -235,7 +235,7 @@ include_once 'product-action.php';
 
                         <div class="widget-body">
                             <div class="price-wrap text-xs-center">
-                                <p style="margin-bottom: 0px;">TOTAL CALORIES</p>
+                                <p style="margin-bottom: 0px;">TOTAL CALORIES <br>of items in this cart</p>
                                 <h3 class="value"><strong><?php echo $total_cal." kcal"; ?></strong></h3>
                                 <br>
                                 <p style="margin-bottom: 0px;">TOTAL BIll</p>
@@ -275,7 +275,10 @@ include_once 'product-action.php';
                             <button class="menu-btn">Sort by < </button>
                                     <div class="menu-content">
                                         <?php echo '<a class="links-hidden" href="dishes_sortby_price.php?res_id=' . $rows['rs_id'] . '">Price</a>'; ?>
+                                        <?php echo '<a class="links-hidden" href="dishes_sortby_calories.php?res_id=' . $rows['rs_id'] . '">Calories</a>'; ?>
+
                                         <!-- <a class="links-hidden" href="#">Visit Us</a>
+
                                         <a class="links-hidden" href="#">About Us</a> -->
                                     </div>
                         </div>
