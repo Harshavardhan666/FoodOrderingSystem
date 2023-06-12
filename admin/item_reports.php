@@ -144,69 +144,69 @@ session_start();
                             <div class="card-header">
                                 <h4 class="m-b-0 text-white">Reports</h4>
                             </div>
-                            <button onClick="window.print()">Print this page</button>
+                            <button onClick="window.print()">Print Report</button>
                                 
 								
                                 <div class="table-responsive m-t-40">
                                 <?php
 
-    // Query 1
-    $query1 = $db->query("
-    SELECT u.title, SUM(u.quantity) AS total_quantity
-    FROM users_orders u
-    JOIN restaurant r ON u.rs_id = r.rs_id
-    WHERE r.title = 'Main Canteen' AND u.status = 'closed'
-    GROUP BY u.title;
-    ");
+                            // Query 1
+                            $query1 = $db->query("
+                            SELECT u.title, SUM(u.quantity) AS total_quantity
+                            FROM users_orders u
+                            JOIN restaurant r ON u.rs_id = r.rs_id
+                            WHERE r.title = 'Main Canteen' AND u.status = 'closed'
+                            GROUP BY u.title;
+                            ");
 
-    $title1 = [];
-    $quantity1 = [];
+                            $title1 = [];
+                            $quantity1 = [];
 
-    foreach ($query1 as $data) {
-      $title1[] = $data['title'];
-      $quantity1[] = $data['total_quantity'];
-    }
-
-
-
-    // Query 3
-    $query3 = $db->query("
-    SELECT u.title, SUM(u.quantity) AS total_quantity
-    FROM users_orders u
-    JOIN restaurant r ON u.rs_id = r.rs_id
-    WHERE r.title = 'IT Canteen' AND u.status = 'closed'
-    GROUP BY u.title;
-    ");
-
-    $title3 = [];
-    $quantity3 = [];
-
-    foreach ($query3 as $data) {
-      $title3[] = $data['title'];
-      $quantity3[] = $data['total_quantity'];
-    }
-
-    // Query 4
-    $query4 = $db->query("
-    SELECT u.title, SUM(u.quantity) AS total_quantity
-    FROM users_orders u
-    JOIN restaurant r ON u.rs_id = r.rs_id
-    WHERE r.title = 'MBA Canteen'  AND u.status = 'closed'
-    GROUP BY u.title;
-    ");
-
-    $title4 = [];
-    $quantity4 = [];
-
-    foreach ($query4 as $data) {
-      $title4[] = $data['title'];
-      $quantity4[] = $data['total_quantity'];
-    }
+                            foreach ($query1 as $data) {
+                            $title1[] = $data['title'];
+                            $quantity1[] = $data['total_quantity'];
+                            }
 
 
 
-    $db->close();
-    ?>
+                            // Query 3
+                            $query3 = $db->query("
+                            SELECT u.title, SUM(u.quantity) AS total_quantity
+                            FROM users_orders u
+                            JOIN restaurant r ON u.rs_id = r.rs_id
+                            WHERE r.title = 'IT Canteen' AND u.status = 'closed'
+                            GROUP BY u.title;
+                            ");
+
+                            $title3 = [];
+                            $quantity3 = [];
+
+                            foreach ($query3 as $data) {
+                            $title3[] = $data['title'];
+                            $quantity3[] = $data['total_quantity'];
+                            }
+
+                            // Query 4
+                            $query4 = $db->query("
+                            SELECT u.title, SUM(u.quantity) AS total_quantity
+                            FROM users_orders u
+                            JOIN restaurant r ON u.rs_id = r.rs_id
+                            WHERE r.title = 'MBA Canteen'  AND u.status = 'closed'
+                            GROUP BY u.title;
+                            ");
+
+                            $title4 = [];
+                            $quantity4 = [];
+
+                            foreach ($query4 as $data) {
+                            $title4[] = $data['title'];
+                            $quantity4[] = $data['total_quantity'];
+                            }
+
+
+
+                            $db->close();
+                            ?>
         
                             <div class="chart-container">
                                 <div>

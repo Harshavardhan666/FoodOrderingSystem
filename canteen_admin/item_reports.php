@@ -14,12 +14,25 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>All Orders</title>
+    <title>All Menu</title>
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #donutGraph {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
 
-
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -41,11 +54,11 @@ session_start();
                     </a>
                 </div>
                 <?php
-                        $session=$_SESSION["adm_id"]; 
-                        $user= mysqli_query($db,"select * FROM restaurant where restaurant.rs_id=(select rs_id from admin where adm_id='$session');");
-                        $rows=mysqli_fetch_array($user);
-;                        
-                    ?>
+
+                $session = $_SESSION["adm_id"];
+                $user = mysqli_query($db, "select * FROM restaurant where restaurant.rs_id=(select rs_id from admin where adm_id='$session');");
+                $rows = mysqli_fetch_array($user);
+                ?>
                 <div class="navbar-collapse">
 
                     <ul class="navbar-nav mr-auto mt-md-0">
@@ -53,7 +66,7 @@ session_start();
 
 
 
-                    </ul> <?php echo $rows["title"]; ?>
+                    </ul><?php echo $rows["title"]; ?>
 
                     <ul class="navbar-nav my-lg-0">
 
@@ -130,113 +143,97 @@ session_start();
 
         <div class="page-wrapper">
 
-
-
             <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
-
-
                         <div class="col-lg-12">
                             <div class="card card-outline-primary">
                                 <div class="card-header">
-                                    <h4 class="m-b-0 text-white">All Orders</h4>
+                                    <h4 class="m-b-0 text-white">Reports</h4>
                                 </div>
+                                <button onClick="window.print()">Print Reports</button>
 
-                                <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Item Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Reg-Date</th>
-                                                <th>Action</th>
+                                <!-- bar Chart -->
+                                <div>
+                                    <?php
+                                            
+                                        $query1 = $db->query("
+                                        SELECT u.title, SUM(u.quantity) AS total_quantity
+                                        FROM users_orders u
+                                        JOIN restaurant r ON u.rs_id = r.rs_id
+                                        WHERE u.status = 'closed' and r.rs_id =$rows[rs_id]
+                                        GROUP BY u.title;
+                                        ");
+            
+                                        $title1 = [];
+                                        $quantity1 = [];
+            
+                                        foreach ($query1 as $data) {
+                                        $title1[] = $data['title'];
+                                        $quantity1[] = $data['total_quantity'];
+                                            }
+                                        
+                                    ?>
+                                    <div class="chart-container">
+                                        <div>
+                                            <canvas id="myChart1" style="height: 300px; width: 600px;"></canvas>
+                                        </div>
+                                    </div>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <script>
+                                        // Chart 1
+                                        const labels1 = <?php echo json_encode($title1) ?>;
+                                        const data1 = {
+                                            labels: labels1,
+                                            datasets: [
+                                            {
+                                                label: 'Item vs Quantity (<?php echo $rows["title"]; ?>)',
+                                                data: <?php echo json_encode($quantity1) ?>,
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                borderWidth: 1
+                                            }
+                                            ]
+                                        };
 
-
-                                            <?php
-                                            $session=$_SESSION["adm_id"];
-
-                                            $sql = "SELECT u.username AS User, o.title AS 'Item Name', o.quantity AS Quantity, o.price AS Price, o.status AS Status, o.date AS 'Reg-Date'
-                                            FROM users u
-                                            JOIN users_orders o ON u.u_id = o.u_id
-                                            JOIN restaurant r ON o.rs_id = r.rs_id
-                                            WHERE r.rs_id = (select rs_id from admin where adm_id='$session');";
-                                            $query = mysqli_query($db, $sql);
-
-                                            if (!mysqli_num_rows($query) > 0) {
-                                                echo '<td colspan="8"><center>No Orders</center></td>';
-                                            } else {
-                                                while ($rows = mysqli_fetch_array($query)) {
-
-                                            ?>
-                                                    <?php
-                                                    echo ' <tr>
-																					           <td>' . $rows['User'] . '</td>
-																								<td>' . $rows['Item Name'] . '</td>
-																								<td>' . $rows['Quantity'] . '</td>
-																								<td>Rs ' . $rows['Price'] . '</td>';
-                                                    ?>
-                                                    <?php
-                                                    $status = $rows['status'];
-                                                    
-                                                    if ($status == "in process" or $status == "" or $status == "NULL") { ?>
-                                                        <td> <button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin" aria-hidden="true"></span> Preparing</button></td>
-                                                    <?php
-                                                    }
-                                                    if ($status == "closed") {
-                                                    ?>
-                                                        <td> <button type="button" class="btn btn-primary"><span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button></td>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <?php
-                                                    if ($status == "rejected") {
-                                                    ?>
-                                                        <td> <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button></td>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <?php
-                                                    echo '	<td>' . $rows['date'] . '</td>';
-                                                    ?>
-                                                    <td>
-                                                        <!-- <a href="delete_orders.php?order_del=<?php echo $rows['o_id']; ?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> -->
-                                                <?php
-                                                    echo '<a href="view_order.php?user_upd=' . $rows['o_id'] . '" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
-																									</td>
-																									</tr>';
+                                        const config1 = {
+                                            type: 'bar',
+                                            data: data1,
+                                            options: {
+                                            scales: {
+                                                y: {
+                                                beginAtZero: true
                                                 }
                                             }
+                                            }
+                                        };
 
-
-                                                ?>
-
-
-
-                                        </tbody>
-                                    </table>
+                                        var myChart1 = new Chart(
+                                            document.getElementById('myChart1'),
+                                            config1
+                                        );
+                                    </script>
                                 </div>
+
+                                
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
+
         </div>
+
+        <footer class="footer"> © 2023 - Online Food Ordering System </footer>
+
+    </div>
     </div>
 
     </div>
 
-
-    <footer class="footer"> © 2023 - Online Food Ordering System</footer>
+    <footer class="footer"> © 2023 - Online Food Ordering System </footer>
 
     </div>
 
@@ -256,8 +253,7 @@ session_start();
     <script src="js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
     <script src="js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-
+    <script src="js/lib/datatables/datatables-init.js"></script>
 </body>
 
 </html>

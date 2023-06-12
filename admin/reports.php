@@ -144,7 +144,7 @@ session_start();
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">Reports</h4>
                                 </div>
-                                <button onClick="window.print()">Print this page</button>
+                                <button onClick="window.print()">Print Report</button>
                                 
                                 <br>
                                 <!-- LINE Chart -->
