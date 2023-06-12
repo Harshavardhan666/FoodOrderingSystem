@@ -54,7 +54,8 @@ include_once 'product-action.php';
 
         .menu-btn {
             background-color: #040008;
-            color: white;
+            background-color: white;
+            color: black;
             padding: 12px;
             font-size: 20px;
             font-weight: bolder;
@@ -98,8 +99,14 @@ include_once 'product-action.php';
             display: block;
         }
 
-        .dropdown-menu:hover .menu-btn {
+        /* .dropdown-menu:hover .menu-btn {
             background-color: #669999;
+        } */
+
+        #men {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
     </style>
 
@@ -155,7 +162,7 @@ include_once 'product-action.php';
                     <div class="row">
                         <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
                             <div class="image-wrap">
-                                <figure><?php echo '<img src="admin/Res_img/' . $rows['image'] . '" alt="Restaurant logo">'; ?></figure>
+                                <figure><?php echo '<img src="admin/Res_img/' . $rows['image'] . '"alt="Restaurant logo">'; ?></figure>
                             </div>
                         </div>
 
@@ -196,13 +203,13 @@ include_once 'product-action.php';
                                 <?php
 
                                 $item_total = 0;
-                                $total_cal=0;
+                                $total_cal = 0;
 
                                 foreach ($_SESSION["cart_item"] as $item) {
-                                    $user= mysqli_query($db," select * from dishes where title='$item[title]' ");
-                                    $rows=mysqli_fetch_array($user);
+                                    $user = mysqli_query($db, " select * from dishes where title='$item[title]' ");
+                                    $rows = mysqli_fetch_array($user);
                                 ?>
-                                        
+
                                     <div class="title-row">
                                         <?php echo $item["title"]; ?><a href="dishes_sortby_calories.php?res_id=<?php echo $_GET['res_id']; ?>&action=remove&id=<?php echo $item["d_id"]; ?>">
                                             <i class="fa fa-trash pull-right"></i></a>
@@ -235,12 +242,12 @@ include_once 'product-action.php';
 
                         <div class="widget-body">
                             <div class="price-wrap text-xs-center">
-                            <p style="margin-bottom: 0px;">TOTAL CALORIES <br>of items in this cart</p>
-                                <h3 class="value"><strong><?php echo $total_cal." kcal"; ?></strong></h3>
+                                <p style="margin-bottom: 0px;">TOTAL CALORIES <br>of items in this cart</p>
+                                <h3 class="value"><strong><?php echo $total_cal . " kcal"; ?></strong></h3>
                                 <br>
-                                <p style="margin-bottom: 0px;">TOTAL BIll</p>
+                                <p style="margin-bottom: 0px;">TOTAL BILL</p>
                                 <h3 class="value"><strong><?php echo "Rs " . $item_total; ?></strong></h3>
-                                
+
 
                                 <?php
                                 if ($item_total == 0) {
@@ -268,19 +275,19 @@ include_once 'product-action.php';
 
                 <div class="col-md-8">
 
-                    <div>
-                        <h1>Menu</h1>
+                    <div class="row" id="men">
+                        <h1>Menu</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <div class="dropdown-menu">
-                            <button class="menu-btn">Sort by < </button>
-                                    <div class="menu-content">
-                                        <?php echo '<a class="links-hidden" href="dishes.php?res_id=' . $rows['rs_id'] . '">Dish Name</a>'; ?>
-                                        <?php echo '<a class="links-hidden" href="dishes_sortby_price.php?res_id=' . $rows['rs_id'] . '">Price</a>'; ?>
-                                        <!-- <a class="links-hidden" href="#">Visit Us</a>
+                            <button class="menu-btn">Sort by</button>
+                            <div class="menu-content">
+                                <?php echo '<a class="links-hidden" href="dishes.php?res_id=' . $rows['rs_id'] . '">Dish Name</a>'; ?>
+                                <?php echo '<a class="links-hidden" href="dishes_sortby_price.php?res_id=' . $rows['rs_id'] . '">Price</a>'; ?>
+                                <!-- <a class="links-hidden" href="#">Visit Us</a>
                                         <a class="links-hidden" href="#">About Us</a> -->
-                                    </div>
+                            </div>
                         </div>
-                    </div>
+                    </div><br><br><br><br>
 
 
 
